@@ -39,7 +39,7 @@ class Home extends Component {
 	render() {
 		return (
 			<Container>
-				<InputGroup style={homeStyle}className="mb-3">
+				<InputGroup style={homeStyle} className="mb-3">
 					<FormControl
 						placeholder="lorem-ipsum.demo"
 						value={this.state.value}

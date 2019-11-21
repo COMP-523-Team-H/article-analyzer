@@ -211,7 +211,7 @@ class Workspace extends Component {
 		var startCon = stateAnno.range.startContainer;
 		var startConRect = startCon.getBoundingClientRect();
 		var startConX = startConRect.x + startConRect.width;
-		var startConY = startConRect.y + (startConRect.height / 2);
+		var startConY = startConRect.y;
 
 		console.log(startConX + ", " + startConY + " : " + annoX + ", " + annoY);
 

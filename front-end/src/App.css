@@ -12,34 +12,34 @@
 }
 
 .highlight.selected.selected-red {
-  background-color:red;
+  background-color: rgba(255,0,0,0.5);
 }
 
 .highlight.selected.selected-green {
-  background-color:darkgreen;
+  background-color: rgba(0,0,100,0.5);
 }
 
 .highlight.selected.selected-gray {
-  background-color:gray;
+  background-color: rgba(128,128,128,0.5);
 }
 
 
 .highlight.highlight-gray {
-  background-color:lightgray
+  background-color: rgba(211,211,211,0.5);
 }
 
 .highlight.highlight-red {
-  background-color:pink;
+  background-color: rgba(255,192,203,0.5);
 }
 .highlight.highlight-green {
-  background-color:green;
+  background-color: rgba(0,128,0,0.5);
 }
 .highlight.highlight-yellow {
-  background-color:yellow;
+  background-color: rgba(255,255,0,0.5);
 }
 
 .highlight.highlight-green.highlight-gray{
-  background-color: #09d3ac;
+  background-color: rgba(9, 211, 172, 0.5);
   
 }
 

@@ -43,7 +43,7 @@ class PendingAnnotation extends Component {
 
 		return (
 			<Container id={this.state.id} className="annotation">
-				<h5>{this.state.name}</h5>
+				<b>{this.state.name}</b>
 				{content}
 			</Container>
 		);
