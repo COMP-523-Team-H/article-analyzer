@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react"
 import Container from "react-bootstrap/Container"
+import Line from "./Line"
 
 class Annotation extends Component {
 	constructor(props) {
@@ -15,22 +16,30 @@ class Annotation extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 
-	handleClick(){
-		this.setState({collapsed: !this.state.collapsed},()=>{this.props.selectAnnotation(this.state)})
+	handleClick() {
+		this.setState({ collapsed: !this.state.collapsed }, () => { this.props.selectAnnotation(this.state) })
 	}
 
 
 	render() {
-		var content = this.state.collapsed && this.state.content.length>140? this.state.content.substr(0,140)+" ..." : this.state.content;
+		var content = this.state.collapsed && this.state.content.length > 140 ? this.state.content.substr(0, 140) + " ..." : this.state.content;
 		return (
-			<Container
-				id={this.state.id}
-				className="annotation"
-				onClick={this.handleClick}
-				style={{backgroundColor: "light"+this.state.color}}>
-				<b className="annotationHeader">{this.state.name}</b><br /> 
-				<span className="annotationContent">{content}</span>
-			</Container>
+			<Fragment>
+				<Container
+					id={this.state.id}
+					className="annotation"
+					onClick={this.handleClick}
+					style={{ backgroundColor: "light" + this.state.color }}
+				>
+					<b className="annotationHeader">{this.state.name}</b><br />
+					<span className="annotationContent">{content}</span>
+				</Container>
+				<Line 
+					annoId={this.state.id}
+					range={this.state.range}
+					color={this.state.color}
+				/>
+			</Fragment>
 		);
 	}
 }

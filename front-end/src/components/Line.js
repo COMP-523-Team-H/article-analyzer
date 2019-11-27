@@ -3,24 +3,36 @@ import React, { Component } from "react"
 class Annotation extends Component {
 	constructor(props) {
 		super(props);
-
-		//get bounding rects of annotation and range start
-		var annotation = document.getElementById(props.annoId);
-		var annoRect = annotation.getBoundingClientRect();
-		var startCon = props.range.startContainer;
-		var startConRect = startCon.getBoundingClientRect();
-
 		this.state = {
-			annoX: annoRect.x,
-			annoY: annoRect.y + (annoRect.height / 2),
-			contX: startConRect.x,
-			contY: startConRect.y,
-			color: props.color
+			annoX: null,
+			annoY: null,
+			contX: null,
+			contY: null,
+			color: props.color,
+			mounted: false
 		}
 	}
 
+	componentDidMount() {
+		//get bounding rects of annotation and range start
+		var annotation = document.getElementById(this.props.annoId);
+		console.log(this.props.annoId);
+		var annoRect = annotation.getBoundingClientRect();
+		var startCon = this.props.range.startContainer;
+		var startConRect = startCon.getBoundingClientRect();
+
+		this.setState({
+			annoX: annoRect.x,
+			annoY: annoRect.y + (annoRect.height / 2) + window.pageYOffset,
+			contX: startConRect.x,
+			contY: startConRect.y + window.pageYOffset,
+		})
+
+		this.setState({ mounted: true });
+	}
+
 	render() {
-		return (
+		return (this.state.mounted ?
 			<svg
 				style={{ position: "absolute", left: "0", top: "0" }}
 				width={document.body.clientWidth}
@@ -31,9 +43,11 @@ class Annotation extends Component {
 					y1={this.state.annoY}
 					x2={this.state.contX}
 					y2={this.state.contY}
-					style="stroke:rgb(128,128,128); stroke-width:2"
-				/>
+					style={{stroke: this.state.color, strokeWidth: 2, zIndex: -100}}
+		/>
 			</svg>
+			:
+			null
 		);
 	}
 }
