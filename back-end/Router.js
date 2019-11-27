@@ -67,15 +67,14 @@ var scrape = html => {
         //set what width and height we want to remove 
         if(width < 20 || height < 20){
           $(this).remove()
-          content += "<br />" ;
         }else{
           //build image tag here
-          let image = "<img alt=" + alt
+          let image = "<div class=\"imageWrap\" id=\""+uuidv4()+"\"><img alt=" + alt
           + " src=" + src
           + " width=" + width
           + " height=" + height
           + " srcset=" + srcset
-          + ">";
+          + "/></div>";
           content += image + "<br />" ;
         }
          

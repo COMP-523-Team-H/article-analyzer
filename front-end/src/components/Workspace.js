@@ -43,7 +43,6 @@ class Workspace extends Component {
 		this.finishAnnotation = this.finishAnnotation.bind(this);
 		this.setColor = this.setColor.bind(this);
 		this.selectAnnotation = this.selectAnnotation.bind(this);
-		this.collapseAnnotation = this.collapseAnnotation.bind(this);
 	}
 
 	componentDidMount() {
@@ -54,6 +53,11 @@ class Workspace extends Component {
 					date: data.date,
 					original_url: data.original_url,
 					content: data.content
+				}, ()=>{
+					$(".imageWrap").click((e)=>{
+						var id = e.currentTarget.id;
+
+					})
 				});
 			})
 			);
@@ -92,7 +96,9 @@ class Workspace extends Component {
 					collaborators: data
 				});
 			})
-			);
+		);
+
+		
 	}
 
 	addCollabName(name) {
@@ -104,6 +110,22 @@ class Workspace extends Component {
 
 	setColor(color) {
 		this.setState({ color });
+	}
+
+	imageAnnotation(id){
+		$("#"+id).addClass("image-"+this.state.color);
+		var annotation = {
+			id,
+			time: "now",
+			content:"",
+			color:this.state.color,
+			type: "image"
+		}
+
+		// Paused here. Need to figure out how to refactor annotation class for both image and annotation
+		this.setState({
+			pendingAnnotation: annotation
+		})
 	}
 
 	createAnnotation(annotation) {
@@ -167,7 +189,7 @@ class Workspace extends Component {
 		if (annotation.type === "click") {
 			return;
 		}
-		// console.log(annotation);
+		// DARKENED HIGHLIGHT AREA
 		var selected = this.state.selectedAnnotation;
 		if (!selected) {
 			rangy.addOverlay(annotation.range, annotation.color);
@@ -180,17 +202,43 @@ class Workspace extends Component {
 			rangy.removeOverlay(selected.range, selected.color);
 			this.setState({ selectedAnnotation: null });
 		}
-	}
 
-	collapseAnnotation(annotation) {
-		this.setState({
-			annotations: this.state.annotations.map((a) => {
-				if (a.id === annotation.id) {
-					a.collapsed = !a.collapsed;
-				}
-				return a;
-			})
-		})
+		
+		var animation_move;
+		var new_highlight;
+		if(selected){
+			if(selected.id === annotation.id){
+				animation_move = 0;
+				new_highlight = 400;
+			}else{
+				new_highlight = $(annotation.range.startContainer).offset().top;
+				var str = $("#"+annotation.id).css("top");
+				$(".annotation").css("top", 0);
+				var original = $("#"+annotation.id).offset().top;
+				$(".annotation").css("top", str);
+				animation_move = new_highlight - original;
+				
+			}
+		}else{
+			new_highlight = $(annotation.range.startContainer).offset().top;
+			animation_move = new_highlight - $("#"+annotation.id).offset().top;
+		}
+
+		if(animation_move<0){
+			animation_move = 0;
+		}
+		$('html, body').stop().animate({ scrollTop: new_highlight -300}, 500);
+		$(".annotation").stop().animate({"top": animation_move+"px"}, 500, "linear");
+		
+		
+		// annimation_move = 
+		// console.log(annotation_move)
+		
+		// console.log($("#"+annotation.id).offset().top);
+		// var jump = $(this).attr('href');
+		// var new_position = $(jump).offset();
+		// 
+		// e.preventDefault();
 	}
 
 	renderAllConnections() {
@@ -207,7 +255,7 @@ class Workspace extends Component {
 		var annoX = annoRect.x;
 		var annoY = annoRect.y + (annoRect.height / 2);
 
-		var stateAnno = this.state.annotations.find((a) => a.id == annoId);
+		var stateAnno = this.state.annotations.find((a) => a.id === annoId);
 		var startCon = stateAnno.range.startContainer;
 		var startConRect = startCon.getBoundingClientRect();
 		var startConX = startConRect.x + startConRect.width;
@@ -259,13 +307,15 @@ class Workspace extends Component {
 							createAnnotation={this.createAnnotation}
 						/>
 						<button onClick={() => {this.renderAllConnections()}}>conns</button>
-						<AnnotationList
-							workspace={this.state.workspace}
-							annotations={this.state.annotations}
-							selectAnnotation={this.selectAnnotation}
-							collapseAnnotation={this.collapseAnnotation}
-						/>
-						{pendingAnnotation}
+						<div id="annotationSection">
+							<AnnotationList
+								workspace={this.state.workspace}
+								annotations={this.state.annotations}
+								selectAnnotation={this.selectAnnotation}
+							/>
+							{pendingAnnotation}
+						</div>
+						
 					</Col>
 				</Row>
 				<canvas

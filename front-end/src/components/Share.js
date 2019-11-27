@@ -10,16 +10,9 @@ const hostname = process.env["REACT_APP_APIURL"] || "http://localhost:8080";
 class Share extends Component {
 
 	sendEmail(userEmail, copiedURL){
-		fetch(hostname + '/api/email', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email: userEmail,
-				url: copiedURL
-			})
+		req.post(hostname + '/api/email', {
+			email: userEmail,
+			url: copiedURL
 		}).then((response) => {
 			// add response validation
 			alert("Your email was sent!");

@@ -9,10 +9,11 @@ class PendingAnnotation extends Component {
 		super(props);
 		this.state = {
 			name: props.name,
-			content: props.content,
+			content: "",
 			id: props.id,
 			color:props.color,
 			range:props.range,
+			collapsed: false
 		}
 		this.handleChange = this.handleChange.bind(this);
 		
@@ -22,6 +23,7 @@ class PendingAnnotation extends Component {
 	handleChange(e) {
 		this.setState({
 			content: e.target.value,
+			collapsed: e.target.value.length>140
 		});
 	}
 
