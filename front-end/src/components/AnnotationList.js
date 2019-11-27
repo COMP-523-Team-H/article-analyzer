@@ -19,6 +19,7 @@ class AnnotationList extends Component {
 					range={annotation.range}
 					selectAnnotation={this.props.selectAnnotation}
 					collapsed={annotation.collapsed}
+					animated={annotation.animated}
 				/>
 			)
 		:null;

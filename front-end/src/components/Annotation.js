@@ -11,7 +11,8 @@ class Annotation extends Component {
 			id: props.id,
 			color: props.color,
 			range: props.range,
-			collapsed: false
+			collapsed: false,
+			animated: props.animated
 		}
 		this.handleClick = this.handleClick.bind(this);
 	}
@@ -19,7 +20,6 @@ class Annotation extends Component {
 	handleClick() {
 		this.setState({ collapsed: !this.state.collapsed }, () => { this.props.selectAnnotation(this.state) })
 	}
-
 
 	render() {
 		var content = this.state.collapsed && this.state.content.length > 140 ? this.state.content.substr(0, 140) + " ..." : this.state.content;

@@ -76,6 +76,7 @@ class Workspace extends Component {
 						rangy.highlight(range, annotation.color);
 						rangy.addTarget(range, annotation.id);
 						annotation.collapsed = false;
+						annotation.animated = false;
 					})
 					this.setState({
 						annotations: annotations.map(v => ({ ...v, finished: true }))
@@ -202,7 +203,6 @@ class Workspace extends Component {
 			rangy.removeOverlay(selected.range, selected.color);
 			this.setState({ selectedAnnotation: null });
 		}
-
 		
 		var animation_move;
 		var new_highlight;
@@ -229,8 +229,7 @@ class Workspace extends Component {
 		}
 		$('html, body').stop().animate({ scrollTop: new_highlight -300}, 500);
 		$(".annotation").stop().animate({"top": animation_move+"px"}, 500, "linear");
-		
-		
+
 		// annimation_move = 
 		// console.log(annotation_move)
 		
@@ -239,36 +238,6 @@ class Workspace extends Component {
 		// var new_position = $(jump).offset();
 		// 
 		// e.preventDefault();
-	}
-
-	renderAllConnections() {
-		this.state.annotations.forEach((a) => {
-			this.renderConnection(a.id);
-		});
-	}
-
-	//getBoundingClientRect() provides coordinates in the viewport
-	//scrolling will change these coordinates!
-	renderConnection(annoId) {
-		var annotation = document.getElementById(annoId);
-		var annoRect = annotation.getBoundingClientRect();
-		var annoX = annoRect.x;
-		var annoY = annoRect.y + (annoRect.height / 2);
-
-		var stateAnno = this.state.annotations.find((a) => a.id === annoId);
-		var startCon = stateAnno.range.startContainer;
-		var startConRect = startCon.getBoundingClientRect();
-		var startConX = startConRect.x + startConRect.width;
-		var startConY = startConRect.y;
-
-		console.log(startConX + ", " + startConY + " : " + annoX + ", " + annoY);
-
-		var c = document.getElementById("connCanv");
-		var ctx = c.getContext("2d");
-		ctx.beginPath();
-		ctx.moveTo(startConX, startConY);
-		ctx.lineTo(annoX, annoY);
-		ctx.stroke();
 	}
 
 	render() {
@@ -292,7 +261,7 @@ class Workspace extends Component {
 						/>
 						<Website content={this.state.content} />
 					</Col>
-					<Col xs={4}>
+					<Col xs={4} id="rightColumn">
 						<NameInput
 							nameSet={this.state.nameSet}
 							addCollabName={this.addCollabName}
