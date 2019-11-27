@@ -8,6 +8,7 @@ class PendingAnnotation extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			type: props.type,
 			name: props.name,
 			content: "",
 			id: props.id,
@@ -21,6 +22,7 @@ class PendingAnnotation extends Component {
 
 
 	handleChange(e) {
+		console.log(this.state.type);
 		this.setState({
 			content: e.target.value,
 			collapsed: e.target.value.length>140
