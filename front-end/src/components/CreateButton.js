@@ -13,6 +13,7 @@ class CreateButton extends Component {
                     :
                     (e) => {
                         this.props.createAnnotation({
+                            type: "text",
                             id: uuidv4(),
                             workspace: this.props.workspace,
                             name: this.props.name,

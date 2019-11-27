@@ -52,10 +52,11 @@ var scrape = html => {
         || tagname == 'h4'
         || tagname == 'h5'
         || tagname == 'h6'){
-          let text = $(this).text();
           //build header tag here
-          let header = "<" + tagname + ">" + text + "</" + tagname + ">";
-          content += header + "<br />" ;
+          var html = $(this).text().split(" ").map((word)=>{
+            return "<" + tagname + " id=\""+ uuidv4() +"\">"  + word + "</" + tagname+ ">";
+          })
+          content += html.join("") + "<br />" ;
         }
       else if(tagname == 'img'){
         let width = Number($(this).attr('width'));

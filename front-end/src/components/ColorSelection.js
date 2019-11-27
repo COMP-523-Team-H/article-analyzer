@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container"
 class ColorSelection extends Component {
     
 	render() {
-        var colors = ["red", "green", "gray", "yellow"];
+        var colors = ["red", "green", "gray", "yellow", "blue"];
         var selectionPanel = colors.map(color=>{
             //fix the dynamic styling later
             return <div 

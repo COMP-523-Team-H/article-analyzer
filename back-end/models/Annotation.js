@@ -38,6 +38,10 @@ let Annotation = new Schema({
 
 	color:{
 		type: String
+	},
+	
+	type:{
+		type: String
 	}
 
 	// LOCATION OF ANNOTATION
