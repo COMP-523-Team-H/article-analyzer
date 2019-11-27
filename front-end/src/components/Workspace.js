@@ -75,7 +75,7 @@ class Workspace extends Component {
 						range.setEnd(endNode, 0);
 						rangy.highlight(range, annotation.color);
 						rangy.addTarget(range, annotation.id);
-						annotation.collapsed = false;
+						annotation.collapsed = true;
 						annotation.animated = false;
 					})
 					this.setState({
@@ -155,6 +155,7 @@ class Workspace extends Component {
 	}
 
 	finishAnnotation(annotation) {
+		console.log(annotation);
 		var range = rangy.compress(this.state.pendingRange);
 		rangy.addTarget(this.state.pendingRange, annotation.id);
 		// rangy.addClick(this.state.pendingRange);
@@ -203,7 +204,25 @@ class Workspace extends Component {
 			rangy.removeOverlay(selected.range, selected.color);
 			this.setState({ selectedAnnotation: null });
 		}
-		
+
+		console.log(annotation);
+		console.log(this.state.annotations);
+
+		var newAnnos = this.state.annotations.map((a) => {
+			if (a.id === annotation.id) {
+				console.log("hit");
+				return {...a, animated: true};
+			} else {
+				return a;
+			}
+		})
+		console.log(newAnnos);
+
+		//this.setState({annotations: this.state.annotations.map((a) => (a.id === annotation.id ? {...a, animated: true} : a))})
+		this.setState({annotations: newAnnos});
+
+		console.log(this.state.annotations);
+
 		var animation_move;
 		var new_highlight;
 		if(selected){
@@ -275,7 +294,6 @@ class Workspace extends Component {
 						<CreateButton
 							createAnnotation={this.createAnnotation}
 						/>
-						<button onClick={() => {this.renderAllConnections()}}>conns</button>
 						<div id="annotationSection">
 							<AnnotationList
 								workspace={this.state.workspace}

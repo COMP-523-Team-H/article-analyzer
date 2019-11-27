@@ -11,7 +11,7 @@ class Annotation extends Component {
 			id: props.id,
 			color: props.color,
 			range: props.range,
-			collapsed: false,
+			collapsed: props.collapsed,
 			animated: props.animated
 		}
 		this.handleClick = this.handleClick.bind(this);
@@ -19,6 +19,7 @@ class Annotation extends Component {
 
 	handleClick() {
 		this.setState({ collapsed: !this.state.collapsed }, () => { this.props.selectAnnotation(this.state) })
+		//setTimeout(this.forceUpdate(), 505);
 	}
 
 	render() {

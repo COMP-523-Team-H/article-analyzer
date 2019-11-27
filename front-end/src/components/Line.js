@@ -42,7 +42,7 @@ class Annotation extends Component {
 		var annotation = document.getElementById(this.props.annoId);
 		var annoRect = annotation.getBoundingClientRect();
 
-		if (annoRect.y + (annoRect.height / 2) + window.pageYOffset != this.state.annoY) {
+		if (annoRect.y + (annoRect.height / 2) + window.pageYOffset !== this.state.annoY) {
 			this.setState({
 				annoX: annoRect.x,
 				annoY: annoRect.y + (annoRect.height / 2) + window.pageYOffset,
@@ -51,9 +51,9 @@ class Annotation extends Component {
 	}
 
 	render() {
-		console.log(this.parentElement)
 		return (this.state.mounted ?
 			<svg
+				id={"svg-" + this.props.annoId}
 				style={{
 					position: "absolute",
 					left: 0 - this.state.xOffset,
