@@ -11,16 +11,19 @@ class Annotation extends Component {
 			id: props.id,
 			color: props.color,
 			range: props.range,
-			collapsed: true
+			collapsed: props.collapsed
 		}
 	}
-
+	//	<Line annoId={this.state.id} range={this.state.range} color={this.state.color}/>
 	render() {
 		var content = this.state.collapsed ? this.state.content.substr(0, 140) + " ..." : this.state.content;
 		return (
 			<Fragment>
-				<Line />
-				<Container id={this.state.id} className="annotation" onClick={() => { this.setState({ collapsed: !this.state.collapsed }) }}>
+				<Container
+					id={this.state.id}
+					className="annotation"
+					onClick={() => { this.setState({ collapsed: !this.state.collapsed }) }}
+					style={{backgroundColor: this.state.color}}>
 					<b className="annotationHeader">{this.state.name}</b><br />
 					<span className="annotationContent">{content}</span>
 				</Container>

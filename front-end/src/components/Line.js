@@ -3,12 +3,19 @@ import React, { Component } from "react"
 class Annotation extends Component {
 	constructor(props) {
 		super(props);
+
+		//get bounding rects of annotation and range start
+		var annotation = document.getElementById(props.annoId);
+		var annoRect = annotation.getBoundingClientRect();
+		var startCon = props.range.startContainer;
+		var startConRect = startCon.getBoundingClientRect();
+
 		this.state = {
-			annoX: null,
-			annoY: null,
-			contX: null,
-			contY: null,
-			color: null
+			annoX: annoRect.x,
+			annoY: annoRect.y + (annoRect.height / 2),
+			contX: startConRect.x,
+			contY: startConRect.y,
+			color: props.color
 		}
 	}
 
