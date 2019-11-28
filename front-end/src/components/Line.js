@@ -24,6 +24,7 @@ class Annotation extends Component {
 		var annoRect = annotation.getBoundingClientRect();
 		var startCon = this.props.range.startContainer;
 		var startConRect = startCon.getBoundingClientRect();
+		console.log(this.props.range);
 
 		this.setState({
 			xOffset: colRect.x,

@@ -327,21 +327,9 @@ class Workspace extends Component {
 						
 					</Col>
 				</Row>
-				<canvas
-					style={canvasStyle} 
-					id="connCanv"
-					width={window.innerWidth}
-					height={window.innerHeight} />
 			</Container>
 		)
 	}
-}
-
-const canvasStyle = {
-	position: "absolute",
-	top: "0",
-	left: "0",
-	zIndex: "-100"
 }
 
 export default Workspace
