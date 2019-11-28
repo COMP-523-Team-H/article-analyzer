@@ -4,6 +4,7 @@
 
 .imageWrap {
   cursor: pointer;
+  display: inline-block;
 }
 
 .content {
@@ -15,6 +16,7 @@
   margin: 5px;
 }
 
+<<<<<<< HEAD
 .highlight.selected.selected-red {
   background-color: rgba(255,0,0,0.5);
 }
@@ -45,6 +47,12 @@
 .highlight.highlight-green.highlight-gray{
   background-color: rgba(9, 211, 172, 0.5);
   
+=======
+.image.highlight.highlight-gray {
+  border-style: solid;
+  border-width: 0 10px 0 0;
+  border-right-color: gray;
+>>>>>>> master
 }
 
 .highlight {
@@ -70,6 +78,6 @@
   display: none;
 }
 
-.blur {
-  filter: blur(6px)
+.selected {
+  font-style:italic;
 }

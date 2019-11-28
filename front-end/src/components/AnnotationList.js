@@ -7,6 +7,7 @@ import Annotation from "./Annotation"
 class AnnotationList extends Component {
 	
 	render() {
+		console.log(this.props.annotations);
 		const annotations = this.props.annotations? 
 			this.props.annotations.map((annotation) => 
 				<Annotation 
@@ -20,6 +21,7 @@ class AnnotationList extends Component {
 					selectAnnotation={this.props.selectAnnotation}
 					collapsed={annotation.collapsed}
 					animated={annotation.animated}
+					type={annotation.type}
 				/>
 			)
 		:null;

@@ -6,6 +6,7 @@ class Annotation extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			type: props.type,
 			name: props.name,
 			content: props.content,
 			id: props.id,
