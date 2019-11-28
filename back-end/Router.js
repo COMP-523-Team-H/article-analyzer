@@ -64,7 +64,7 @@ var scrape = html => {
         let alt = $(this).attr('alt');
 
         //set what width and height we want to remove 
-        if(width < 20 || height < 20){
+        if(width <= 20 || height <= 20){
           $(this).remove()
         }else{
           //build image tag here

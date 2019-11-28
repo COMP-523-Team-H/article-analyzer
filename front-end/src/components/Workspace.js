@@ -54,6 +54,18 @@ class Workspace extends Component {
 	}
 
 	componentDidMount() {
+		$(window).scroll(function() {
+			var winScrollTop = $(window).scrollTop();
+			var winHeight = $(window).height();
+			var floaterHeight = $('#create').outerHeight(true);
+			var fromBottom = 20;
+			var top = winScrollTop + winHeight - floaterHeight - fromBottom;
+			$('#create').css({'top': top + 'px'});
+			$('#colorPanel').css({'top': top-180 + 'px'});
+			
+		});
+		$(window).trigger("scroll", "1px");
+
 		req.get(hostname + '/api/workspace/' + this.state.workspace)
 			.then((response) => response.json().then(data => {
 				this.setState({
@@ -85,7 +97,6 @@ class Workspace extends Component {
 								alert("Error during loading the workspace. Try refresh the page")
 								return;
 							}
-							console.log(annotation);
 							range.setStart(startNode, 0);
 							range.setEnd(endNode, 0);
 							rangy.highlight(range, annotation.color);
@@ -94,7 +105,6 @@ class Workspace extends Component {
 						}else{
 							rangy.highlight_image(annotation.range, annotation.color);
 						}
-						
 					})
 					this.setState({
 						annotations: annotations.map(v => ({ ...v, finished: true }))
@@ -128,8 +138,10 @@ class Workspace extends Component {
 		})
 	}
 
-	setColor(color) {
-		this.setState({ color });
+	setColor(c) {
+		$(".color.selected").removeClass("selected");
+		$("#"+c).addClass("selected");
+		this.setState({ c });
 	}
 
 	imageAnnotation(image){
@@ -154,7 +166,6 @@ class Workspace extends Component {
 		if(annotation.type === "text"){
 			var selectedText;
 			var range;
-			console.log(annotation);
 			if (window.getSelection) {
 				selectedText = window.getSelection();
 			}
@@ -236,8 +247,9 @@ class Workspace extends Component {
 			rangy.addOverlay(annotation);
 			this.setState({ selectedAnnotation: annotation });
 		} else if (selected.id !== annotation.id) {
+			rangy.removeOverlay(selected, selected.color);
 			rangy.addOverlay(annotation);
-			rangy.removeOverlay(selected.range, selected.color);
+			
 			this.setState({ selectedAnnotation: annotation });
 		} else {
 			rangy.removeOverlay(selected);
@@ -246,6 +258,7 @@ class Workspace extends Component {
 
 		var animation_move;
 		var new_highlight;
+		console.log($("#"+annotation.range))
 		if(selected){
 			if(selected.id === annotation.id){
 				animation_move = 0;
@@ -254,7 +267,8 @@ class Workspace extends Component {
 				if(annotation.type === "text"){
 					new_highlight = $(annotation.range.startContainer).offset().top;	
 				}else{
-					new_highlight = $("#"+annotation.range).offset.top;
+					console.log(".....")
+					new_highlight = $("#"+annotation.range).offset().top;
 				}
 				var str = $("#"+annotation.id).css("top");
 				$(".annotation").css("top", 0);
@@ -275,6 +289,8 @@ class Workspace extends Component {
 		if(animation_move<0){
 			animation_move = 0;
 		}
+		console.log(new_highlight);
+		console.log(animation_move)
 		$('html, body').stop().animate({ scrollTop: new_highlight -300}, 500);
 		$(".annotation").stop().animate({"top": animation_move+"px"}, 500, "linear");
 	}
@@ -340,15 +356,11 @@ class Workspace extends Component {
 							nameSet={this.state.nameSet}
 							addCollabName={this.addCollabName}
 						/>
-						<ColorSelection
-							onClick={this.setColor}
-						/>
+						
 						<Collaborators
 							collaborators={this.state.collaborators}
 						/>
-						<CreateButton
-							createAnnotation={this.createAnnotation}
-						/>
+						
 						<button onClick={() => {this.renderAllConnections()}}>conns</button>
 						<div id="annotationSection">
 							<AnnotationList
@@ -366,7 +378,14 @@ class Workspace extends Component {
 					id="connCanv"
 					width={window.innerWidth}
 					height={window.innerHeight} />
+				<CreateButton
+					createAnnotation={this.createAnnotation}
+				/>
+				<ColorSelection
+					onClick={this.setColor}
+				/>
 			</Container>
+			
 		)
 	}
 }

@@ -65,6 +65,7 @@ const rangy = {
         image.addClass("image");
         image.addClass("highlight");
         image.addClass("highlight-"+color);
+        rangy.refresh(id, null);
     },
 
    
@@ -79,7 +80,7 @@ const rangy = {
                 rangy.refresh(node.id, color);
             })
         }else{
-            console.log("image add overlay")
+            rangy.refresh(range, color);
         }
         
     },
@@ -95,7 +96,7 @@ const rangy = {
                 rangy.refresh(node.id, null);
             })
         }else{
-            console.log("image remove overlay")
+            rangy.refresh(range, null);
         }
     },
 
@@ -115,7 +116,7 @@ const rangy = {
                 }
             });
             if(classList.contains("image")){
-                color.drawImage(id, colors);
+                color.drawImage(id, colors, selected);
             }else{
                 if(classList.contains("selected")){
                     color.drawText(id, colors, selected);
@@ -123,7 +124,6 @@ const rangy = {
                     color.drawText(id, colors, selected);
                 }
             }
-            
         }
     }
 
