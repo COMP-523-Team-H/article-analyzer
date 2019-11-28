@@ -44,8 +44,8 @@ const rangy = {
     },
     
     compress: (range)=>{
-        var start = range.startContainer.parentElement;
-        var end = range.endContainer.parentElement;
+        var start = range.startContainer;
+        var end = range.endContainer;
         return {start:start.id, end:end.id};
     },
 
