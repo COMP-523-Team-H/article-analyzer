@@ -85,6 +85,7 @@ class Workspace extends Component {
 								alert("Error during loading the workspace. Try refresh the page")
 								return;
 							}
+							console.log(annotation);
 							range.setStart(startNode, 0);
 							range.setEnd(endNode, 0);
 							rangy.highlight(range, annotation.color);
@@ -195,11 +196,13 @@ class Workspace extends Component {
 
 	finishAnnotation(annotation) {
 		var range;
+		console.log(annotation);
 		if(annotation.type ==="text"){
 			range = rangy.compress(this.state.pendingRange);
 		}else{
 			range = annotation.range;
 		}
+		console.log(range);
 		req.post(hostname + '/api/annotation/insert', 
 			{
 				...annotation,
