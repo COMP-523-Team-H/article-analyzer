@@ -20,7 +20,7 @@ class Annotation extends Component {
 
 	handleClick() {
 		this.setState({ collapsed: !this.state.collapsed }, () => { this.props.selectAnnotation(this.state) })
-		//setTimeout(this.forceUpdate(), 505);
+		//setTimeout(() => {this.forceUpdate(); console.log("help");}, 505);
 	}
 
 	render() {
