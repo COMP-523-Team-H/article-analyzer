@@ -15,6 +15,7 @@ import ColorSelection from "./ColorSelection"
 import PendingAnnotation from "./PendingAnnotation"
 import CreateButton from "./CreateButton"
 import ErrorPage from "./ErrorPage"
+import ScreenSizeWarning from "./ScreenSizeWarning"
 
 import rangy from "../util/rangy"
 import req from "../util/req"
@@ -300,7 +301,8 @@ class Workspace extends Component {
 				type ={this.state.pendingType}
 			/> : null;
 
-		return (
+		if (window.innerWidth < 800) return (<ScreenSizeWarning />);
+		else return (
 			<Container>
 				<Row>
 					<h1>{this.state.original_url}</h1>
