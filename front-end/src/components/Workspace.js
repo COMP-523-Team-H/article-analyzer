@@ -280,7 +280,7 @@ class Workspace extends Component {
 			duration: 500,
 			easing: "linear",
 			step: () => {
-				this.forceUpdate();
+				this.setState({annotations: this.state.annotations.map(a => ({ ...a, animated: !a.animated}))});
 			}
 		});
 	}
