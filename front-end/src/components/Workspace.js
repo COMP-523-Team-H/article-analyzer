@@ -276,7 +276,13 @@ class Workspace extends Component {
 			animation_move = 0;
 		}
 		$('html, body').stop().animate({ scrollTop: new_highlight -300}, 500);
-		$(".annotation").stop().animate({"top": animation_move+"px"}, 500, "linear");
+		$(".annotation").stop().animate({"top": animation_move+"px"}, {
+			duration: 500,
+			easing: "linear",
+			step: () => {
+				this.forceUpdate();
+			}
+		});
 	}
 
 	render() {
