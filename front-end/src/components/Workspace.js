@@ -15,6 +15,7 @@ import ColorSelection from "./ColorSelection"
 import PendingAnnotation from "./PendingAnnotation"
 import CreateButton from "./CreateButton"
 import ErrorPage from "./ErrorPage"
+import ScreenSizeWarning from "./ScreenSizeWarning"
 
 import rangy from "../util/rangy"
 import req from "../util/req"
@@ -292,37 +293,13 @@ class Workspace extends Component {
 		console.log(new_highlight);
 		console.log(animation_move)
 		$('html, body').stop().animate({ scrollTop: new_highlight -300}, 500);
-		$(".annotation").stop().animate({"top": animation_move+"px"}, 500, "linear");
-	}
-
-	renderAllConnections() {
-		this.state.annotations.forEach((a) => {
-			this.renderConnection(a.id);
+		$(".annotation").stop().animate({"top": animation_move+"px"}, {
+			duration: 500,
+			easing: "linear",
+			step: () => {
+				this.setState({annotations: this.state.annotations.map(a => ({ ...a, animated: !a.animated}))});
+			}
 		});
-	}
-
-	//getBoundingClientRect() provides coordinates in the viewport
-	//scrolling will change these coordinates!
-	renderConnection(annoId) {
-		var annotation = document.getElementById(annoId);
-		var annoRect = annotation.getBoundingClientRect();
-		var annoX = annoRect.x;
-		var annoY = annoRect.y + (annoRect.height / 2);
-
-		var stateAnno = this.state.annotations.find((a) => a.id === annoId);
-		var startCon = stateAnno.range.startContainer;
-		var startConRect = startCon.getBoundingClientRect();
-		var startConX = startConRect.x + startConRect.width;
-		var startConY = startConRect.y + (startConRect.height / 2);
-
-		console.log(startConX + ", " + startConY + " : " + annoX + ", " + annoY);
-
-		var c = document.getElementById("connCanv");
-		var ctx = c.getContext("2d");
-		ctx.beginPath();
-		ctx.moveTo(startConX, startConY);
-		ctx.lineTo(annoX, annoY);
-		ctx.stroke();
 	}
 
 	render() {
@@ -340,7 +317,8 @@ class Workspace extends Component {
 				type ={this.state.pendingType}
 			/> : null;
 
-		return (
+		if (window.innerWidth < 800) return (<ScreenSizeWarning />);
+		else return (
 			<Container>
 				<Row>
 					<h1>{this.state.original_url}</h1>
@@ -351,7 +329,7 @@ class Workspace extends Component {
 						/>
 						<Website content={this.state.content} />
 					</Col>
-					<Col xs={4}>
+					<Col xs={4} id="rightColumn">
 						<NameInput
 							nameSet={this.state.nameSet}
 							addCollabName={this.addCollabName}
@@ -360,8 +338,14 @@ class Workspace extends Component {
 						<Collaborators
 							collaborators={this.state.collaborators}
 						/>
+<<<<<<< HEAD
 						
 						<button onClick={() => {this.renderAllConnections()}}>conns</button>
+=======
+						<CreateButton
+							createAnnotation={this.createAnnotation}
+						/>
+>>>>>>> 8ae25e080a1608d9c410d241357dd86e73432163
 						<div id="annotationSection">
 							<AnnotationList
 								workspace={this.state.workspace}
@@ -373,6 +357,7 @@ class Workspace extends Component {
 						
 					</Col>
 				</Row>
+<<<<<<< HEAD
 				<canvas
 					style={canvasStyle} 
 					id="connCanv"
@@ -384,17 +369,12 @@ class Workspace extends Component {
 				<ColorSelection
 					onClick={this.setColor}
 				/>
+=======
+>>>>>>> 8ae25e080a1608d9c410d241357dd86e73432163
 			</Container>
 			
 		)
 	}
-}
-
-const canvasStyle = {
-	position: "absolute",
-	top: "0",
-	left: "0",
-	zIndex: "-100"
 }
 
 export default Workspace
