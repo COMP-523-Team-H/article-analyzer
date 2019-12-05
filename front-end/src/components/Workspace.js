@@ -22,6 +22,8 @@ import req from "../util/req"
 
 
 const hostname = process.env["REACT_APP_APIURL"] || "http://localhost:8080";
+const animalList = ['Canidae', 'Felidae', 'Cat', 'Cattle', 'Dog', 'Donkey', 'Goat', 'Guinea pig', 'Horse', 'Pig', 'Rabbit', 'Fancy rat varieties', 'laboratory rat strains', 'Sheep breeds', 'Water buffalo breeds', 'Chicken breeds', 'Duck breeds', 'Goose breeds', 'Pigeon breeds', 'Turkey breeds', 'Aardvark', 'Aardwolf', 'African buffalo', 'African elephant', 'African leopard', 'Albatross', 'Alligator', 'Alpaca', 'American buffalo (bison)', 'American robin', 'Amphibian', 'list', 'Anaconda', 'Angelfish', 'Anglerfish', 'Ant', 'Anteater', 'Antelope', 'Antlion', 'Ape', 'Aphid', 'Arabian leopard', 'Arctic Fox', 'Arctic Wolf', 'Armadillo', 'Arrow crab', 'Asp', 'Ass (donkey)', 'Baboon', 'Badger', 'Bald eagle', 'Bandicoot', 'Barnacle', 'Barracuda', 'Basilisk', 'Bass', 'Bat', 'Beaked whale', 'Bear', 'list', 'Beaver', 'Bedbug', 'Bee', 'Beetle', 'Bird', 'list', 'Bison', 'Blackbird', 'Black panther', 'Black widow spider', 'Blue bird', 'Blue jay', 'Blue whale', 'Boa', 'Boar', 'Bobcat', 'Bobolink', 'Bonobo', 'Booby', 'Box jellyfish', 'Bovid', 'Buffalo', 'African', 'Buffalo', 'American (bison)', 'Bug', 'Butterfly', 'Buzzard', 'Camel', 'Canid', 'Cape buffalo', 'Capybara', 'Cardinal', 'Caribou', 'Carp', 'Cat', 'list', 'Catshark', 'Caterpillar', 'Catfish', 'Cattle', 'list', 'Centipede', 'Cephalopod', 'Chameleon', 'Cheetah', 'Chickadee', 'Chicken', 'list', 'Chimpanzee', 'Chinchilla', 'Chipmunk', 'Clam', 'Clownfish', 'Cobra', 'Cockroach', 'Cod', 'Condor', 'Constrictor', 'Coral', 'Cougar', 'Cow', 'Coyote', 'Crab', 'Crane', 'Crane fly', 'Crawdad', 'Crayfish', 'Cricket', 'Crocodile', 'Crow', 'Cuckoo', 'Cicada', 'Damselfly', 'Deer', 'Dingo', 'Dinosaur', 'list', 'Dog', 'list', 'Dolphin', 'Donkey', 'list', 'Dormouse', 'Dove', 'Dragonfly', 'Dragon', 'Duck', 'list', 'Dung beetle', 'Eagle', 'Earthworm', 'Earwig', 'Echidna', 'Eel', 'Egret', 'Elephant', 'Elephant seal', 'Elk', 'Emu', 'English pointer', 'Ermine', 'Falcon', 'Ferret', 'Finch', 'Firefly', 'Fish', 'Flamingo', 'Flea', 'Fly', 'Flyingfish', 'Fowl', 'Fox', 'Frog', 'Fruit bat', 'Gamefowl', 'list', 'Galliform', 'list', 'Gazelle', 'Gecko', 'Gerbil', 'Giant panda', 'Giant squid', 'Gibbon', 'Gila monster', 'Giraffe', 'Goat', 'list', 'Goldfish', 'Goose', 'list', 'Gopher', 'Gorilla', 'Grasshopper', 'Great blue heron', 'Great white shark', 'Grizzly bear', 'Ground shark', 'Ground sloth', 'Grouse', 'Guan', 'list', 'Guanaco', 'Guineafowl', 'list', 'Guinea pig', 'list', 'Gull', 'Guppy', 'Haddock', 'Halibut', 'Hammerhead shark', 'Hamster', 'Hare', 'Harrier', 'Hawk', 'Hedgehog', 'Hermit crab', 'Heron', 'Herring', 'Hippopotamus', 'Hookworm', 'Hornet', 'Horse', 'list', 'Hoverfly', 'Hummingbird', 'Humpback whale', 'Hyena', 'Iguana', 'Impala', 'Irukandji jellyfish', 'Jackal', 'Jaguar', 'Jay', 'Jellyfish', 'Junglefowl', 'Kangaroo', 'Kangaroo mouse', 'Kangaroo rat', 'Kingfisher', 'Kite', 'Kiwi', 'Koala', 'Koi', 'Komodo dragon', 'Krill', 'Ladybug', 'Lamprey', 'Landfowl', 'Land snail', 'Lark', 'Leech', 'Lemming', 'Lemur', 'Leopard', 'Leopon', 'Limpet', 'Lion', 'Lizard', 'Llama', 'Lobster', 'Locust', 'Loon', 'Louse', 'Lungfish', 'Lynx', 'Macaw', 'Mackerel', 'Magpie', 'Mammal', 'Manatee', 'Mandrill', 'Manta ray', 'Marlin', 'Marmoset', 'Marmot', 'Marsupial', 'Marten', 'Mastodon', 'Meadowlark', 'Meerkat', 'Mink', 'Minnow', 'Mite', 'Mockingbird', 'Mole', 'Mollusk', 'Mongoose', 'Monitor lizard', 'Monkey', 'Moose', 'Mosquito', 'Moth', 'Mountain goat', 'Mouse', 'Mule', 'Muskox', 'Narwhal', 'Newt', 'New World quail', 'Nightingale', 'Ocelot', 'Octopus', 'Old World quail', 'Opossum', 'Orangutan', 'Orca', 'Ostrich', 'Otter', 'Owl', 'Ox', 'Panda', 'Panther', 'Panthera hybrid', 'Parakeet', 'Parrot', 'Parrotfish', 'Partridge', 'Peacock', 'Peafowl', 'Pelican', 'Penguin', 'Perch', 'Peregrine falcon', 'Pheasant', 'Pig', 'Pigeon', 'list', 'Pike', 'Pilot whale', 'Pinniped', 'Piranha', 'Planarian', 'Platypus', 'Polar bear', 'Pony', 'Porcupine', 'Porpoise', "Portuguese man o' war", 'Possum', 'Prairie dog', 'Prawn', 'Praying mantis', 'Primate', 'Ptarmigan', 'Puffin', 'Puma', 'Python', 'Quail', 'Quelea', 'Quokka', 'Rabbit', 'list', 'Raccoon', 'Rainbow trout', 'Rat', 'Rattlesnake', 'Raven', 'Ray (Batoidea)', 'Ray (Rajiformes)', 'Red panda', 'Reindeer', 'Reptile', 'Rhinoceros', 'Right whale', 'Roadrunner', 'Rodent', 'Rook', 'Rooster', 'Roundworm', 'Saber-toothed cat', 'Sailfish', 'Salamander', 'Salmon', 'Sawfish', 'Scale insect', 'Scallop', 'Scorpion', 'Seahorse', 'Sea lion', 'Sea slug', 'Sea snail', 'Shark', 'list', 'Sheep', 'list', 'Shrew', 'Shrimp', 'Silkworm', 'Silverfish', 'Skink', 'Skunk', 'Sloth', 'Slug', 'Smelt', 'Snail', 'Snake', 'list', 'Snipe', 'Snow leopard', 'Sockeye salmon', 'Sole', 'Sparrow', 'Sperm whale', 'Spider', 'Spider monkey', 'Spoonbill', 'Squid', 'Squirrel', 'Starfish', 'Star-nosed mole', 'Steelhead trout', 'Stingray', 'Stoat', 'Stork', 'Sturgeon', 'Sugar glider', 'Swallow', 'Swan', 'Swift', 'Swordfish', 'Swordtail', 'Tahr', 'Takin', 'Tapir', 'Tarantula', 'Tarsier', 'Tasmanian devil', 'Termite', 'Tern', 'Thrush', 'Tick', 'Tiger', 'Tiger shark', 'Tiglon', 'Toad', 'Tortoise', 'Toucan', 'Trapdoor spider', 'Tree frog', 'Trout', 'Tuna', 'Turkey', 'list', 'Turtle', 'Tyrannosaurus', 'Urial', 'Vampire bat', 'Vampire squid', 'Vicuna', 'Viper', 'Vole', 'Vulture', 'Wallaby', 'Walrus', 'Wasp', 'Warbler', 'Water Boa', 'Water buffalo', 'Weasel', 'Whale', 'Whippet', 'Whitefish', 'Whooping crane', 'Wildcat', 'Wildebeest', 'Wildfowl', 'Wolf', 'Wolverine', 'Wombat', 'Woodpecker', 'Worm', 'Wren', 'Xerinae', 'X-ray fish', 'Yak', 'Yellow perch', 'Zebra', 'Zebra finch', 'Animals by number of neurons', 'Animals by size', 'Common household pests', 'Common names of poisonous animals', 'Alpaca', 'Bali cattle', 'Cat', 'Cattle', 'Chicken', 'Dog', 'Domestic Bactrian camel', 'Domestic canary', 'Domestic dromedary camel', 'Domestic duck', 'Domestic goat', 'Domestic goose', 'Domestic guineafowl', 'Domestic hedgehog', 'Domestic pig', 'Domestic pigeon', 'Domestic rabbit', 'Domestic silkmoth', 'Domestic silver fox', 'Domestic turkey', 'Donkey', 'Fancy mouse', 'Fancy rat', 'Lab rat', 'Ferret', 'Gayal', 'Goldfish', 'Guinea pig', 'Guppy', 'Horse', 'Koi', 'Llama', 'Ringneck dove', 'Sheep', 'Siamese fighting fish', 'Society finch', 'Yak', 'Water buffalo']
+
 
 class Workspace extends Component {
 	constructor(props) {
@@ -40,6 +42,9 @@ class Workspace extends Component {
 			pendignType:null,
 			color: "red",
 			selectedAnnotation: null,
+			showAllAnnotation: true,
+			annotationsByName: null,
+			currentAnnotationName: "",
 			hasError: false,
 			hide:false
 		}
@@ -49,6 +54,7 @@ class Workspace extends Component {
 		this.setColor = this.setColor.bind(this);
 		this.selectAnnotation = this.selectAnnotation.bind(this);
 		this.imageAnnotation = this.imageAnnotation.bind(this);
+		this.showAnnotationsByName = this.showAnnotationsByName.bind(this);
 	}
 
 	componentDidCatch(error, info){
@@ -144,6 +150,8 @@ class Workspace extends Component {
 		).catch(error=>{
 			this.setState({hasError:true});
 		});
+		let name = this.randomAnimal()
+		this.setState({collabName: "Anonymous " + name});
 	}
 
 	addCollabName(name) {
@@ -310,11 +318,76 @@ class Workspace extends Component {
 		});
 	}
 
+	showAnnotationsByName = e =>{
+		let nameAnnotations = []
+		console.log(this.state.annotations)
+		this.state.annotations.forEach((a) => {
+			if(e.target.id == a.name){
+				nameAnnotations.push(a)
+			}
+		});
+		if(this.state.showAllAnnotation){
+			e.target.style.backgroundColor = "#72bcd4"
+			this.setState({
+				annotationsByName: nameAnnotations,
+				showAllAnnotation: false,
+				currentAnnotationName: e.target.id
+				})
+		}else if(!this.state.showAllAnnotation && e.target.id == this.state.currentAnnotationName ){
+			e.target.style.backgroundColor = '#add8e6'
+			this.setState({
+				showAllAnnotation: true,
+				currentAnnotationName: ""
+			})
+		}
+		
+	}
+
+	getDate(){
+		let date = new Date();
+		let dateTime = date.toLocaleString();
+		return dateTime;
+	}
+
+	randomAnimal(){
+		let animalsLength = animalList.length
+		let animal = ''
+		if(this.collaborators != null){
+			let CollabNames = Object.keys(this.state.collaborators);
+			let finish = false;
+			while(!finish){
+				let index = Math.floor(Math.random() * animalsLength);
+				animal = animalList[index];
+				if(!CollabNames.includes(animal)){
+					finish = true;
+				}
+			}
+			return animal;
+		}else{
+			let index = Math.floor(Math.random() * animalsLength);
+			animal = animalList[index];
+			return animal;
+		}
+	}
+
 	render() {
 		
 		if(this.state.hasError){
 			return <ErrorPage/>
 		}
+
+		var nameAnnotations = this.state.showAllAnnotation ?
+			<AnnotationList
+				workspace={this.state.workspace}
+				annotations={this.state.annotations}
+				selectAnnotation={this.selectAnnotation}
+			/> :
+			<AnnotationList
+				workspace={this.state.workspace}
+				annotations={this.state.annotationsByName}
+				selectAnnotation={this.selectAnnotation}
+			/>
+
 		var pendingAnnotation = this.state.pendingAnnotation ?
 			<PendingAnnotation
 				name={this.state.collabName}
@@ -344,13 +417,10 @@ class Workspace extends Component {
 						
 						<Collaborators
 							collaborators={this.state.collaborators}
+							showByName={this.showAnnotationsByName}
 						/>
 						<div id="annotationSection">
-							<AnnotationList
-								workspace={this.state.workspace}
-								annotations={this.state.annotations}
-								selectAnnotation={this.selectAnnotation}
-							/>
+							{nameAnnotations}
 							{pendingAnnotation}
 						</div>
 					</Col>
