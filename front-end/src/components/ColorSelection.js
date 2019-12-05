@@ -6,7 +6,6 @@ import constant from "../util/constant"
 class ColorSelection extends Component {
     
 	render() {
-        console.log(this.props);
         var colors = ["red", "green", "gray", "yellow", "blue"];
         var selectionPanel = colors.map(c=>{
             //fix the dynamic styling later

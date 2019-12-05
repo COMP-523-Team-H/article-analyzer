@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react"
 import Container from "react-bootstrap/Container"
 import Line from "./Line"
+import constant from "../util/constant"
+import color from "../util/color"
 
 class Annotation extends Component {
 	constructor(props) {
@@ -30,7 +32,7 @@ class Annotation extends Component {
 					id={this.state.id}
 					className="annotation"
 					onClick={this.handleClick}
-					style={{ backgroundColor: "light" + this.state.color }}
+					style={{ backgroundColor: color.rgba(constant.COLOR[this.state.color], 0.55) }}
 				>
 					<b className="annotationHeader">{this.state.name}</b><br />
 					<span className="annotationContent">{content}</span>
@@ -39,6 +41,7 @@ class Annotation extends Component {
 					annoId={this.state.id}
 					range={this.state.range}
 					color={this.state.color}
+					type={this.state.type}
 				/>
 			</Fragment>
 		);

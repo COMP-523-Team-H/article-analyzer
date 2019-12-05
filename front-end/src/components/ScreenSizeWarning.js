@@ -7,7 +7,7 @@ class ScreenSizeWarning extends Component {
 			<Container>
 				<h3>Your screen is too small!</h3>
 				<p>Article Annotator is designed for use on laptops and desktops, not smartphones and tablets.</p>
-				<p>Please switch to a device with a larger screen.</p>
+				<p>Please switch to a device with a larger screen or change your screen size and refresh the page.</p>
 			</Container>
 		)
 	}

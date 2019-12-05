@@ -8,27 +8,32 @@ var color = {
     },
 
     drawImage: (id, colors, selected) =>{
-        
-        var gradient = "linear-gradient(180deg";
-        // var interval = 100/(colors.length);
-        var interval = 100/(colors.length-1);
-        colors.forEach((c, i)=>{
-            var a = 0.5;
-            if(c === selected){
-                a = 1;
-            }
-            var rgb = constant.COLOR[c];
-            var rgba = color.rgba(rgb, a);
-            // gradient+=", " + rgba + i*interval+"%"+", " + rgba + (i+1)*interval+"%";
-            gradient+=", " + rgba + i*interval+"%";
-        })
-        gradient = gradient+")";
-        $("#"+id).css("background", gradient);
+
+        if(colors.length === 1){
+            var rgb = constant.COLOR[colors[0]];
+            $("#"+id).css("background", color.rgba(rgb, 0.4));
+        }else{
+            var gradient = "linear-gradient(180deg";
+            var interval = 100/(colors.length-1);
+            colors.forEach((c, i)=>{
+                var a = 0.4;
+                if(c === selected){
+                    a = 1;
+                }
+                var rgb = constant.COLOR[c];
+                var rgba = color.rgba(rgb, a);
+                // gradient+=", " + rgba + i*interval+"%"+", " + rgba + (i+1)*interval+"%";
+                gradient+=", " + rgba +" "+ i*interval+"%";
+            })
+            gradient = gradient+")";
+    
+            $("#"+id).css("background", gradient);
+        }
     },
 
     drawText: (id, colors, selected)=>{
         var count = colors.length;
-        var a = 0.6;
+        var a = 0.4;
         var rgb;
         if(selected){
             rgb = constant.COLOR[selected];
