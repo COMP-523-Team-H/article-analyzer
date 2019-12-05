@@ -3,30 +3,37 @@ import constant from "./constant"
 
 var color = {
 
-    drawImage: (id, colors) =>{
-        //construct gradient
+    rgba: (rgb, a)=>{
+        return "rgba("+rgb[0]+","+rgb[1]+","+rgb[2]+","+a+")";
+    },
+
+    drawImage: (id, colors, selected) =>{
+        
+        var gradient = "linear-gradient(180deg";
+        // var interval = 100/(colors.length);
+        var interval = 100/(colors.length-1);
+        colors.forEach((c, i)=>{
+            var a = 0.5;
+            if(c === selected){
+                a = 1;
+            }
+            var rgb = constant.COLOR[c];
+            var rgba = color.rgba(rgb, a);
+            // gradient+=", " + rgba + i*interval+"%"+", " + rgba + (i+1)*interval+"%";
+            gradient+=", " + rgba + i*interval+"%";
+        })
+        gradient = gradient+")";
+        $("#"+id).css("background", gradient);
     },
 
     drawText: (id, colors, selected)=>{
         var count = colors.length;
-        var accum = [0,0,0];
-        var a;
+        var a = 0.6;
+        var rgb;
         if(selected){
-            colors.forEach(c=>{
-                var rgb = constant.COLOR[c];
-                var hsv = color.rgb2hsv(rgb);
-                if(c === selected){
-                    accum[0] += hsv[0]*count;
-                    accum[1] += hsv[1]*count;
-                    accum[2] += hsv[2]*count;
-                }else{
-                    accum[0] += hsv[0];
-                    accum[1] += hsv[1];
-                    accum[2] += hsv[2];
-                }
-            })
-            a = 0.5;
+            rgb = constant.COLOR[selected];
         }else{
+            var accum = [0,0,0];
             colors.forEach(c=>{
                 var rgb = constant.COLOR[c];
                 var hsv = color.rgb2hsv(rgb);
@@ -34,11 +41,10 @@ var color = {
                 accum[1] += hsv[1];
                 accum[2] += hsv[2];
             })
-            a = 0.2
+            var mix = accum.map(a=>a/count);
+            rgb = color.hsv2rgb(mix);
         }
-        var mix = accum.map(a=>a/count);
-        var rgb = color.hsv2rgb(mix);
-        var rgba = "rgba("+rgb[0]+","+rgb[1]+","+rgb[2]+","+a+")";
+        var rgba = color.rgba(rgb,a);
         $("#"+id).css("background-color", rgba);
     },
 

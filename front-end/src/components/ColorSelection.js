@@ -1,29 +1,31 @@
 import React, { Component } from "react"
 import Container from "react-bootstrap/Container"
+import color from "../util/color"
+import constant from "../util/constant"
 
 class ColorSelection extends Component {
     
 	render() {
         var colors = ["red", "green", "gray", "yellow", "blue"];
-        var selectionPanel = colors.map(color=>{
+        var selectionPanel = colors.map(c=>{
             //fix the dynamic styling later
             return <div 
                 style={{
-                        width:"20px",
-                        height:"20px",
-                        float:"left",
-                        backgroundColor:color,
+                        width:"45px",
+                        height:"25px",
+                        backgroundColor:color.rgba(constant.COLOR[c], 0.8),
                         margin:"3px",
                         cursor:"pointer"
                 }}
-                onClick={()=>{this.props.onClick(color)}}
-                key={color}
+                id={c}
+                onClick={()=>{this.props.onClick(c)}}
+                key={c}
+                className="color"
             >
-
             </div>
         })
 		return (
-			<Container style={{height:"20px",margin:"10px"}}>
+			<Container id="colorPanel" style={{height:"20px",margin:"10px"}}>
 				{selectionPanel}
 			</Container>
 		)
