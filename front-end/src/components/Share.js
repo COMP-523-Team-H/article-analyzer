@@ -37,10 +37,9 @@ class Share extends Component {
 		//copy button
 		if (buttonID === 'copyButton') {
 			//set what you want to copy here
-			let copyContent = hostname + "/" + this.props.urlID;
+			let copyContent = window.location.href
 			this.copyToClipboard(copyContent);
-			alert("'" + copyContent + "' was copied to the clip board")
-
+			alert("'" + copyContent + "' was copied to the clip board");
 		}
 		//download button
 		else if (buttonID === 'downloadButton') {
