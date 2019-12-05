@@ -46,7 +46,7 @@ class PendingAnnotation extends Component {
 			</Fragment>
 
 		return (
-			<Container id={this.state.id} className="annotation">
+			<Container id={this.state.id} className="pendingAnnotation">
 				<b>{this.state.name}</b>
 				{content}
 			</Container>

@@ -16,7 +16,7 @@
   margin: 5px;
 }
 
-.image.highlight.highlight-gray {
+.image.highlight {
   padding: 0 10px 0 0;
  
 }
@@ -77,4 +77,9 @@
   border: 2px;
   border-color: black;
   border-style: solid;
+}
+
+.pendingAnnotation{
+  border: 2px;
+  border-color: black;
 }

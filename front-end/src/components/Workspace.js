@@ -38,9 +38,10 @@ class Workspace extends Component {
 			pendingAnnotation: null,
 			pendingRange: null,
 			pendignType:null,
-			color: "gray",
+			color: "red",
 			selectedAnnotation: null,
-			hasError: false
+			hasError: false,
+			hide:false
 		}
 		this.createAnnotation = this.createAnnotation.bind(this);
 		this.addCollabName = this.addCollabName.bind(this);
@@ -54,7 +55,19 @@ class Workspace extends Component {
 		this.setState({hasError: true});
 	}
 
+	resize() {
+		if (this.state.hide || window.innerWidth <= 760) {
+			this.setState({hide: true});
+		}
+	}
+
 	componentDidMount() {
+		window.addEventListener("resize", this.resize.bind(this));
+		this.resize();
+		if(window.innerWidth<=760){
+			return;
+		}
+
 		$(window).scroll(function() {
 			var winScrollTop = $(window).scrollTop();
 			var winHeight = $(window).height();
@@ -66,6 +79,7 @@ class Workspace extends Component {
 			
 		});
 		$(window).trigger("scroll", "1px");
+		$("#red").addClass("selected");
 
 		req.get(hostname + '/api/workspace/' + this.state.workspace)
 			.then((response) => response.json().then(data => {
@@ -142,7 +156,7 @@ class Workspace extends Component {
 	setColor(c) {
 		$(".color.selected").removeClass("selected");
 		$("#"+c).addClass("selected");
-		this.setState({ c });
+		this.setState({ color: c });
 	}
 
 	imageAnnotation(image){
@@ -208,13 +222,12 @@ class Workspace extends Component {
 
 	finishAnnotation(annotation) {
 		var range;
-		console.log(annotation);
+	
 		if(annotation.type ==="text"){
 			range = rangy.compress(this.state.pendingRange);
 		}else{
 			range = annotation.range;
 		}
-		console.log(range);
 		req.post(hostname + '/api/annotation/insert', 
 			{
 				...annotation,
@@ -259,7 +272,6 @@ class Workspace extends Component {
 
 		var animation_move;
 		var new_highlight;
-		console.log($("#"+annotation.range))
 		if(selected){
 			if(selected.id === annotation.id){
 				animation_move = 0;
@@ -268,7 +280,6 @@ class Workspace extends Component {
 				if(annotation.type === "text"){
 					new_highlight = $(annotation.range.startContainer).offset().top;	
 				}else{
-					console.log(".....")
 					new_highlight = $("#"+annotation.range).offset().top;
 				}
 				var str = $("#"+annotation.id).css("top");
@@ -279,7 +290,6 @@ class Workspace extends Component {
 			}
 		}else{
 			if(annotation.type === "text"){
-				console.log($(annotation.range.startContainer))
 				new_highlight = $(annotation.range.startContainer).offset().top;	
 			}else{
 				new_highlight = $("#"+annotation.range).offset().top;
@@ -290,8 +300,6 @@ class Workspace extends Component {
 		if(animation_move<0){
 			animation_move = 0;
 		}
-		console.log(new_highlight);
-		console.log(animation_move)
 		$('html, body').stop().animate({ scrollTop: new_highlight -300}, 500);
 		$(".annotation").stop().animate({"top": animation_move+"px"}, {
 			duration: 500,
@@ -303,7 +311,7 @@ class Workspace extends Component {
 	}
 
 	render() {
-
+		
 		if(this.state.hasError){
 			return <ErrorPage/>
 		}
@@ -316,8 +324,7 @@ class Workspace extends Component {
 				range={this.state.pendingRange}
 				type ={this.state.pendingType}
 			/> : null;
-
-		if (window.innerWidth < 800) return (<ScreenSizeWarning />);
+		if (window.innerWidth < 760) return (<ScreenSizeWarning />);
 		else return (
 			<Container>
 				<Row>
