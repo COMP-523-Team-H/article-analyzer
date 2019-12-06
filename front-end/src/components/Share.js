@@ -57,7 +57,7 @@ class Share extends Component {
 	}
 
 	handleSubmit = e => {
-		let url = hostname + "/" + this.props.urlID;
+		let url = window.location.href;
 		let inputEmail = this.state.email;
 		//valid email checks
 		if(inputEmail == null){
