@@ -338,14 +338,9 @@ class Workspace extends Component {
 						<Collaborators
 							collaborators={this.state.collaborators}
 						/>
-<<<<<<< HEAD
-						
-						<button onClick={() => {this.renderAllConnections()}}>conns</button>
-=======
 						<CreateButton
 							createAnnotation={this.createAnnotation}
 						/>
->>>>>>> 8ae25e080a1608d9c410d241357dd86e73432163
 						<div id="annotationSection">
 							<AnnotationList
 								workspace={this.state.workspace}
@@ -357,20 +352,6 @@ class Workspace extends Component {
 						
 					</Col>
 				</Row>
-<<<<<<< HEAD
-				<canvas
-					style={canvasStyle} 
-					id="connCanv"
-					width={window.innerWidth}
-					height={window.innerHeight} />
-				<CreateButton
-					createAnnotation={this.createAnnotation}
-				/>
-				<ColorSelection
-					onClick={this.setColor}
-				/>
-=======
->>>>>>> 8ae25e080a1608d9c410d241357dd86e73432163
 			</Container>
 			
 		)
