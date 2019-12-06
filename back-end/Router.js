@@ -57,23 +57,17 @@ var scrape = html => {
           content += html + "<br />" ;
         }
       else if(tagname == 'img'){
+        let picture = $(this);
         let width = Number($(this).attr('width'));
         let height = Number($(this).attr('height'));
-        let src = $(this).attr('src');
-        let srcset = $(this).attr('srcset');
-        let alt = $(this).attr('alt');
-
+        let pictureArea = width*height;
+      
         //set what width and height we want to remove 
-        if(width <= 20 || height <= 20){
+        if(pictureArea < 400){
           $(this).remove()
         }else{
           //build image tag here
-          let image = "<div class=\"imageWrap\" id=\""+uuidv4()+"\"><img alt=" + alt
-          + " src=" + src
-          + " width=" + width
-          + " height=" + height
-          + " srcset=" + srcset
-          + "/></div>";
+          let image = "<div class=\"imageWrap\" id=\""+uuidv4()+"\">"+ picture +"</div>"
           content += image + "<br />" ;
         }
          

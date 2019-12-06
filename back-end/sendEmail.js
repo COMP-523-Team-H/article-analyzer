@@ -1,7 +1,8 @@
 var nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport')
 
-
+const emailLoginName = process.env["REACT_APP_EMAIL"];
+const emailPassword = process.env["REACT_APP_EMAILPASSWORD"];
 
 module.exports = function sendMail(email, url){
 	const transport = nodemailer.createTransport(smtpTransport({
@@ -9,13 +10,13 @@ module.exports = function sendMail(email, url){
     	port: 465,
     	secure: true,
 		auth: {
-			user: 'articleannotator@gmail.com',
-			pass: 'comp523pass'
+			user: emailLoginName,
+			pass: emailPassword
 		}
 	}))
 
 	var mailOptions = {
-	from: 'articleannotator@gmail.com',
+	from: emailLoginName,
 	to: email,
 	subject: 'Requested URL',
 	text: 'Here is the URL to your Article Annotator webpage! \n' + url
