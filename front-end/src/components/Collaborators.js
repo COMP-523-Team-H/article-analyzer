@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button"
 
 
 class Collaborators extends Component {
+	
 
 	render() {
 		var collaborators = this.props.collaborators? Object.keys(this.props.collaborators).map((name, i)=>{
@@ -14,7 +15,7 @@ class Collaborators extends Component {
 		return (
 			<Container>
 				<Fragment>
-					<div class="btn-group-vertical">
+					<div className="btn-group-vertical">
 						{collaborators}
 					</div>
 				</Fragment>
@@ -24,10 +25,12 @@ class Collaborators extends Component {
 }
 
 const buttonStyle = {
+	display: "inline-block",
 	backgroundColor: '#add8e6',
 	borderColor: "#838383",
 	borderRadius: 12,
-	color: "black"
+	color: "black",
+	height: "100px"
 }
 
 

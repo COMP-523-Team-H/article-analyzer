@@ -37,10 +37,9 @@ class Share extends Component {
 		//copy button
 		if (buttonID === 'copyButton') {
 			//set what you want to copy here
-			let copyContent = hostname + "/" + this.props.urlID;
+			let copyContent = window.location.href
 			this.copyToClipboard(copyContent);
-			alert("'" + copyContent + "' was copied to the clip board")
-
+			alert("'" + copyContent + "' was copied to the clip board");
 		}
 		//download button
 		else if (buttonID === 'downloadButton') {
@@ -58,7 +57,7 @@ class Share extends Component {
 	}
 
 	handleSubmit = e => {
-		let url = hostname + "/" + this.props.urlID;
+		let url = window.location.href;
 		let inputEmail = this.state.email;
 		//valid email checks
 		if(inputEmail == null){
