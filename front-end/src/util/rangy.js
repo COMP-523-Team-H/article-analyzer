@@ -66,6 +66,7 @@ const rangy = {
         image.addClass("highlight");
         image.addClass("highlight-"+color);
         rangy.refresh(id, null);
+        console.log(id);
     },
 
    

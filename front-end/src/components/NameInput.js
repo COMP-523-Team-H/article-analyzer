@@ -17,7 +17,20 @@ class NameInput extends Component {
 
 	handleChange(e) {
 		this.setState({ name: e.target.value })
-    }
+	}
+	checkName(){
+		if(!this.state.name.replace(/\s/g, '').length){
+			alert("Please enter a real name!");
+		}
+		else{
+			if(this.state.name.length > 30){
+				alert("Please enter a shorter name under 30 characters!")
+			}else{
+				this.props.addCollabName(this.state.name)
+			}
+			
+		}
+	}
     
 	render() {
         const input = this.props.nameSet ?
@@ -35,7 +48,7 @@ class NameInput extends Component {
 					<InputGroup.Append>
 						<Button
 							variant="secondary"
-							onClick={(e) => {this.props.addCollabName(this.state.name)}}
+							onClick={(e) => {this.checkName()}}
 						>
 							Submit
 							</Button>

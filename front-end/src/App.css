@@ -16,7 +16,7 @@
   margin: 5px;
 }
 
-.image.highlight.highlight-gray {
+.image.highlight {
   padding: 0 10px 0 0;
  
 }
@@ -32,6 +32,8 @@
   float: left;
   position:relative;
 }
+
+
 
 .annotation:hover{
   cursor: pointer;
@@ -73,8 +75,40 @@
   margin-right: 50px;
 }
 
+#tip {
+  position: absolute;
+  right:30px;
+  width: 100px;
+  height: 200px;
+  box-sizing: border-box;
+  font-size: 10px;
+  text-align: left;
+}
+
 .color.selected {
-  border: 1px;
+  border: 2px;
   border-color: black;
   border-style: solid;
+}
+
+#annotationSection{
+  display: inline-block;
+}
+
+#pendingAnnotation{
+  border: 2px;
+  border-color: black;
+  display: inline-block;
+  position:relative;
+}
+
+
+.btn-group-vertical {
+  overflow-y: auto;
+  height: auto;
+  max-height: 200px ;
+  width: auto;
+  max-width: 300px ;
+  display: flex !important;
+  justify-content: flex-start !important; 
 }

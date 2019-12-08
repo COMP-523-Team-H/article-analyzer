@@ -11,7 +11,8 @@ class Annotation extends Component {
 			contX: null,
 			contY: null,
 			color: props.color,
-			mounted: false
+			mounted: false,
+			type:this.props.type,
 		}
 	}
 
@@ -22,23 +23,31 @@ class Annotation extends Component {
 		//get bounding rects of annotation and range start
 		var annotation = document.getElementById(this.props.annoId);
 		var annoRect = annotation.getBoundingClientRect();
-		var startCon = this.props.range.startContainer;
-		var startConRect = startCon.getBoundingClientRect();
-		console.log(this.props.range);
+		var startConRect;
+		if(this.state.type==="text"){
+			var startCon = this.props.range.startContainer;
+			startConRect = startCon.getBoundingClientRect();
+		}else{
+			startCon = document.getElementById(this.props.range);
+			startConRect = startCon.getBoundingClientRect();
+		}
+		var annoY = annoRect.y + (annoRect.height / 2) + window.pageYOffset;
+		var contY = startConRect.y + window.pageYOffset;
+	
 
 		this.setState({
 			xOffset: colRect.x,
 			yOffset: colRect.y + window.pageYOffset,
 			annoX: annoRect.x,
 			annoY: annoRect.y + (annoRect.height / 2) + window.pageYOffset,
-			contX: startConRect.x,
+			contX: startConRect.x + startConRect.width -10,
 			contY: startConRect.y + window.pageYOffset
 		})
 
-		this.setState({ mounted: true });
+		this.setState({ mounted: Math.abs(annoY-contY)<1000 });
 	}
 
-	componentDidUpdate() {
+	componentDidUpdate(prevProps, prevState) {
 		//get bounding rects of annotation and range start
 		var annotation = document.getElementById(this.props.annoId);
 		var annoRect = annotation.getBoundingClientRect();
@@ -47,8 +56,10 @@ class Annotation extends Component {
 			this.setState({
 				annoX: annoRect.x,
 				annoY: annoRect.y + (annoRect.height / 2) + window.pageYOffset,
+				mounted: Math.abs(annoRect.y + (annoRect.height / 2) + window.pageYOffset-this.state.contY)<400
 			});
 		}
+		
 	}
 
 	render() {

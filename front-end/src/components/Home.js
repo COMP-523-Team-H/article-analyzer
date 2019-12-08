@@ -18,6 +18,7 @@ class Home extends Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.getDate = this.getDate.bind(this);
 	}
 
 	componentDidCatch(error, info){
@@ -36,7 +37,7 @@ class Home extends Component {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				date: "outside of time",
+				date: this.getDate(),
 				original_url: this.state.value
 			})
 		}).then((response) => {
@@ -52,6 +53,12 @@ class Home extends Component {
 		}).catch(error=>{
 			this.setState({hasError:true});
 		});
+	}
+
+	getDate(){
+		let date = new Date();
+		let dateTime = date.toLocaleString();
+		return dateTime;
 	}
 
 	render() {
