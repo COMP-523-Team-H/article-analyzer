@@ -17,7 +17,6 @@ class PendingAnnotation extends Component {
 			collapsed: false
 		}
 		this.handleChange = this.handleChange.bind(this);
-		
 	}
 
 
@@ -46,9 +45,11 @@ class PendingAnnotation extends Component {
 			</Fragment>
 
 		return (
-			<Container id={this.state.id} className="pendingAnnotation">
-				<b>{this.state.name}</b>
-				{content}
+			<Container >
+				<div id="pendingAnnotation">
+					<b>{this.state.name}</b>
+					{content}
+				</div>
 			</Container>
 		);
 	}

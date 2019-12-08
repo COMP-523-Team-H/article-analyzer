@@ -5,9 +5,6 @@ import FormControl from "react-bootstrap/FormControl"
 import Container from "react-bootstrap/Container"
 
 class EmailModal extends Component {
-	constructor(props) {
-		super(props);	
-	}
 	render() {
 		return (
 		<Container>
