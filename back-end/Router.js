@@ -188,13 +188,14 @@ Router.post("/api/annotation/delete", (req, res) => {
 			console.log("Invalid ID");
 			res.send({ message: "Invalid ID" });
 		} else {
-			Annotation.removeOne({ id }, (err, annotations) => {
+			Annotation.deleteOne({ id }, (err, annotation) => {
 				if (err) {
 					console.log("error when accessing database");
 					res.send({ message: "Database error, please contact maintanence" });
 				}
 				else {
 					console.log("removed annotation");
+					res.send({message: "annotation removed successfully"})
 				}
 			});
 		}
