@@ -39,16 +39,17 @@ class Workspace extends Component {
 			nameSet: false,
 			pendingAnnotation: null,
 			pendingRange: null,
-			pendignType:null,
+			pendignType: null,
 			color: "red",
 			selectedAnnotation: null,
 			showAllAnnotation: true,
 			annotationsByName: null,
 			currentAnnotationName: "",
 			hasError: false,
-			hide:false
+			hide: false
 		}
 		this.createAnnotation = this.createAnnotation.bind(this);
+		this.deleteAnnotation = this.deleteAnnotation.bind(this);
 		this.addCollabName = this.addCollabName.bind(this);
 		this.finishAnnotation = this.finishAnnotation.bind(this);
 		this.setColor = this.setColor.bind(this);
@@ -57,32 +58,32 @@ class Workspace extends Component {
 		this.showAnnotationsByName = this.showAnnotationsByName.bind(this);
 	}
 
-	componentDidCatch(error, info){
-		this.setState({hasError: true});
+	componentDidCatch(error, info) {
+		this.setState({ hasError: true });
 	}
 
 	resize() {
 		if (this.state.hide || window.innerWidth <= 760) {
-			this.setState({hide: true});
+			this.setState({ hide: true });
 		}
 	}
 
 	componentDidMount() {
 		window.addEventListener("resize", this.resize.bind(this));
 		this.resize();
-		if(window.innerWidth<=760){
+		if (window.innerWidth <= 760) {
 			return;
 		}
 
-		$(window).scroll(function() {
+		$(window).scroll(function () {
 			var winScrollTop = $(window).scrollTop();
 			var winHeight = $(window).height();
 			var floaterHeight = $('#create').outerHeight(true);
 			var fromBottom = 20;
 			var top = winScrollTop + winHeight - floaterHeight - fromBottom;
-			$('#create').css({'top': top + 'px'});
-			$('#colorPanel').css({'top': top-180 + 'px'});
-			
+			$('#create').css({ 'top': top + 'px' });
+			$('#colorPanel').css({ 'top': top - 180 + 'px' });
+
 		});
 		$(window).trigger("scroll", "1px");
 		$("#red").addClass("selected");
@@ -94,15 +95,15 @@ class Workspace extends Component {
 					date: data.date,
 					original_url: data.original_url,
 					content: data.content
-				}, ()=>{
-					$(".imageWrap").click((e)=>{
+				}, () => {
+					$(".imageWrap").click((e) => {
 						var id = e.currentTarget.id;
 						this.imageAnnotation(id);
 					})
 				});
 			})
-			).catch(error=>{
-				this.setState({hasError:true});
+			).catch(error => {
+				this.setState({ hasError: true });
 			});
 
 		req.get(hostname + '/api/annotation/all/' + this.state.workspace)
@@ -110,11 +111,11 @@ class Workspace extends Component {
 				.then(data => {
 					var annotations = data.annotations;
 					annotations.forEach(annotation => {
-						if(annotation.type === "text"){
+						if (annotation.type === "text") {
 							var range = new Range();
 							var startNode = document.getElementById(annotation.range.start);
 							var endNode = document.getElementById(annotation.range.end);
-							if(!startNode || !endNode){
+							if (!startNode || !endNode) {
 								alert("Error during loading the workspace. Try refresh the page")
 								return;
 							}
@@ -123,7 +124,7 @@ class Workspace extends Component {
 							rangy.highlight(range, annotation.color);
 							annotation.collapsed = false;
 							annotation.range = range;
-						}else{
+						} else {
 							rangy.highlight_image(annotation.range, annotation.color);
 						}
 					})
@@ -136,8 +137,8 @@ class Workspace extends Component {
 						$("#" + annotation.id).click(this.selectAnnotation);
 					})
 				})
-			).catch(error=>{
-				this.setState({hasError:true});
+			).catch(error => {
+				this.setState({ hasError: true });
 			});
 
 
@@ -147,11 +148,11 @@ class Workspace extends Component {
 					collaborators: data
 				});
 			})
-		).catch(error=>{
-			this.setState({hasError:true});
-		});
+			).catch(error => {
+				this.setState({ hasError: true });
+			});
 		let name = this.randomAnimal()
-		this.setState({collabName: "Anonymous " + name});
+		this.setState({ collabName: "Anonymous " + name });
 	}
 
 	addCollabName(name) {
@@ -163,17 +164,17 @@ class Workspace extends Component {
 
 	setColor(c) {
 		$(".color.selected").removeClass("selected");
-		$("#"+c).addClass("selected");
+		$("#" + c).addClass("selected");
 		this.setState({ color: c });
 	}
 
-	imageAnnotation(image){
-		$("#"+image).addClass("image-"+this.state.color);
+	imageAnnotation(image) {
+		$("#" + image).addClass("image-" + this.state.color);
 		var annotation = {
 			id: uuidv4(),
 			time: "now",
-			content:"",
-			color:this.state.color,
+			content: "",
+			color: this.state.color,
 			type: "image",
 			range: image
 		}
@@ -186,7 +187,7 @@ class Workspace extends Component {
 	}
 
 	createAnnotation(annotation) {
-		if(annotation.type === "text"){
+		if (annotation.type === "text") {
 			var selectedText;
 			var range;
 			if (window.getSelection) {
@@ -197,9 +198,9 @@ class Workspace extends Component {
 				if (range.collapsed) {
 					return;
 				}
-				if(!$("#content").has($(range.commonAncestorContainer))
-				   || range.startContainer.id === "content"
-				   || range.endContainer.id === "content"){
+				if (!$("#content").has($(range.commonAncestorContainer))
+					|| range.startContainer.id === "content"
+					|| range.endContainer.id === "content") {
 					alert("Illegal Annotation Selection");
 					return;
 				}
@@ -217,26 +218,36 @@ class Workspace extends Component {
 				alert("No text selected");
 			}
 		}
-		else{
+		else {
 			rangy.highlight_image(annotation.range, this.state.color);
 			this.setState({
-				pendingAnnotation:annotation,
+				pendingAnnotation: annotation,
 				pendingRange: annotation.range,
-				pendingType:"image",
+				pendingType: "image",
 			})
 		}
-		
+
+	}
+
+	deleteAnnotation(id) {
+		console.log(id);
+		req.post(hostname + '/api/annotation/delete', { id: id }).then((response) => {
+			this.setState({
+				annotations: this.state.annotations.filter(a => a.id !== id)
+			})
+		});
 	}
 
 	finishAnnotation(annotation) {
 		var range;
-	
-		if(annotation.type ==="text"){
+
+		if (annotation.type === "text") {
 			range = rangy.compress(this.state.pendingRange);
-		}else{
+		} else {
 			range = annotation.range;
 		}
-		req.post(hostname + '/api/annotation/insert', 
+		annotation.new = true;
+		req.post(hostname + '/api/annotation/insert',
 			{
 				...annotation,
 				range: range,
@@ -252,7 +263,7 @@ class Workspace extends Component {
 				pendingAnnotation: null,
 				collaborators: newCollaborators,
 				pendingRange: null,
-				pendingType:null,
+				pendingType: null,
 				annotations: [...this.state.annotations, annotation]
 			})
 		});
@@ -271,7 +282,7 @@ class Workspace extends Component {
 		} else if (selected.id !== annotation.id) {
 			rangy.removeOverlay(selected, selected.color);
 			rangy.addOverlay(annotation);
-			
+
 			this.setState({ selectedAnnotation: annotation });
 		} else {
 			rangy.removeOverlay(selected);
@@ -280,90 +291,90 @@ class Workspace extends Component {
 
 		var animation_move;
 		var new_highlight;
-		if(selected){
-			if(selected.id === annotation.id){
+		if (selected) {
+			if (selected.id === annotation.id) {
 				animation_move = 0;
 				new_highlight = 400;
-			}else{
-				if(annotation.type === "text"){
-					new_highlight = $(annotation.range.startContainer).offset().top;	
-				}else{
-					new_highlight = $("#"+annotation.range).offset().top;
+			} else {
+				if (annotation.type === "text") {
+					new_highlight = $(annotation.range.startContainer).offset().top;
+				} else {
+					new_highlight = $("#" + annotation.range).offset().top;
 				}
-				var str = $("#"+annotation.id).css("top");
+				var str = $("#" + annotation.id).css("top");
 				$(".annotation").css("top", 0);
-				var original = $("#"+annotation.id).offset().top;
+				var original = $("#" + annotation.id).offset().top;
 				$(".annotation").css("top", str);
 				animation_move = new_highlight - original;
 			}
-		}else{
-			if(annotation.type === "text"){
-				new_highlight = $(annotation.range.startContainer).offset().top;	
-			}else{
-				new_highlight = $("#"+annotation.range).offset().top;
+		} else {
+			if (annotation.type === "text") {
+				new_highlight = $(annotation.range.startContainer).offset().top;
+			} else {
+				new_highlight = $("#" + annotation.range).offset().top;
 			}
-			animation_move = new_highlight - $("#"+annotation.id).offset().top;
+			animation_move = new_highlight - $("#" + annotation.id).offset().top;
 		}
 
-		if(animation_move<0){
+		if (animation_move < 0) {
 			animation_move = 0;
 		}
-		$('html, body').stop().animate({ scrollTop: new_highlight -300}, 500);
-		$(".annotation").stop().animate({"top": animation_move+"px"}, {
+		$('html, body').stop().animate({ scrollTop: new_highlight - 300 }, 500);
+		$(".annotation").stop().animate({ "top": animation_move + "px" }, {
 			duration: 500,
 			easing: "linear",
 			step: () => {
-				this.setState({annotations: this.state.annotations.map(a => ({ ...a, animated: !a.animated}))});
+				this.setState({ annotations: this.state.annotations.map(a => ({ ...a, animated: !a.animated })) });
 			}
 		});
 	}
 
-	showAnnotationsByName = e =>{
+	showAnnotationsByName = e => {
 		let nameAnnotations = []
 		console.log(this.state.annotations)
 		this.state.annotations.forEach((a) => {
-			if(e.target.id == a.name){
+			if (e.target.id == a.name) {
 				nameAnnotations.push(a)
 			}
 		});
-		if(this.state.showAllAnnotation){
+		if (this.state.showAllAnnotation) {
 			e.target.style.backgroundColor = "#72bcd4"
 			this.setState({
 				annotationsByName: nameAnnotations,
 				showAllAnnotation: false,
 				currentAnnotationName: e.target.id
-				})
-		}else if(!this.state.showAllAnnotation && e.target.id == this.state.currentAnnotationName ){
+			})
+		} else if (!this.state.showAllAnnotation && e.target.id == this.state.currentAnnotationName) {
 			e.target.style.backgroundColor = '#add8e6'
 			this.setState({
 				showAllAnnotation: true,
 				currentAnnotationName: ""
 			})
 		}
-		
+
 	}
 
-	getDate(){
+	getDate() {
 		let date = new Date();
 		let dateTime = date.toLocaleString();
 		return dateTime;
 	}
 
-	randomAnimal(){
+	randomAnimal() {
 		let animalsLength = animalList.length
 		let animal = ''
-		if(this.collaborators != null){
+		if (this.collaborators != null) {
 			let CollabNames = Object.keys(this.state.collaborators);
 			let finish = false;
-			while(!finish){
+			while (!finish) {
 				let index = Math.floor(Math.random() * animalsLength);
 				animal = animalList[index];
-				if(!CollabNames.includes(animal)){
+				if (!CollabNames.includes(animal)) {
 					finish = true;
 				}
 			}
 			return animal;
-		}else{
+		} else {
 			let index = Math.floor(Math.random() * animalsLength);
 			animal = animalList[index];
 			return animal;
@@ -371,9 +382,9 @@ class Workspace extends Component {
 	}
 
 	render() {
-		
-		if(this.state.hasError){
-			return <ErrorPage/>
+
+		if (this.state.hasError) {
+			return <ErrorPage />
 		}
 
 		var nameAnnotations = this.state.showAllAnnotation ?
@@ -381,11 +392,13 @@ class Workspace extends Component {
 				workspace={this.state.workspace}
 				annotations={this.state.annotations}
 				selectAnnotation={this.selectAnnotation}
+				deleteAnnotation={this.deleteAnnotation}
 			/> :
 			<AnnotationList
 				workspace={this.state.workspace}
 				annotations={this.state.annotationsByName}
 				selectAnnotation={this.selectAnnotation}
+				deleteAnnotation={this.deleteAnnotation}
 			/>
 
 		var pendingAnnotation = this.state.pendingAnnotation ?
@@ -395,7 +408,7 @@ class Workspace extends Component {
 				finishAnnotation={this.finishAnnotation}
 				color={this.state.color}
 				range={this.state.pendingRange}
-				type ={this.state.pendingType}
+				type={this.state.pendingType}
 			/> : null;
 		if (window.innerWidth < 760) return (<ScreenSizeWarning />);
 		else return (
@@ -414,7 +427,7 @@ class Workspace extends Component {
 							nameSet={this.state.nameSet}
 							addCollabName={this.addCollabName}
 						/>
-						
+
 						<Collaborators
 							collaborators={this.state.collaborators}
 							showByName={this.showAnnotationsByName}
@@ -432,7 +445,7 @@ class Workspace extends Component {
 					onClick={this.setColor}
 				/>
 			</Container>
-			
+
 		)
 	}
 }

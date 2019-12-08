@@ -194,7 +194,7 @@ Router.post("/api/annotation/delete", (req, res) => {
 					res.send({ message: "Database error, please contact maintanence" });
 				}
 				else {
-					console.log("removed annotation");
+					console.log("removed annotation " + id);
 					res.send({message: "annotation removed successfully"})
 				}
 			});
