@@ -322,7 +322,7 @@ class Workspace extends Component {
 		let nameAnnotations = []
 		console.log(this.state.annotations)
 		this.state.annotations.forEach((a) => {
-			if(e.target.id == a.name){
+			if(e.target.id === a.name){
 				nameAnnotations.push(a)
 			}
 		});
@@ -333,7 +333,7 @@ class Workspace extends Component {
 				showAllAnnotation: false,
 				currentAnnotationName: e.target.id
 				})
-		}else if(!this.state.showAllAnnotation && e.target.id == this.state.currentAnnotationName ){
+		}else if(!this.state.showAllAnnotation && e.target.id === this.state.currentAnnotationName ){
 			e.target.style.backgroundColor = '#add8e6'
 			this.setState({
 				showAllAnnotation: true,
