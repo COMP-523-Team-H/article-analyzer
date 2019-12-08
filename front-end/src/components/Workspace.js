@@ -16,6 +16,7 @@ import PendingAnnotation from "./PendingAnnotation"
 import CreateButton from "./CreateButton"
 import ErrorPage from "./ErrorPage"
 import ScreenSizeWarning from "./ScreenSizeWarning"
+import Tip from "./Tip"
 
 import rangy from "../util/rangy"
 import req from "../util/req"
@@ -81,9 +82,10 @@ class Workspace extends Component {
 			var floaterHeight = $('#create').outerHeight(true);
 			var fromBottom = 20;
 			var top = winScrollTop + winHeight - floaterHeight - fromBottom;
-			$('#create').css({ 'top': top + 'px' });
-			$('#colorPanel').css({ 'top': top - 180 + 'px' });
-
+			$('#create').css({'top': top + 'px'});
+			$('#colorPanel').css({'top': top-180 + 'px'});
+			$('#tip').css({'top': top-280 + 'px'});
+			
 		});
 		$(window).trigger("scroll", "1px");
 		$("#red").addClass("selected");
@@ -117,7 +119,7 @@ class Workspace extends Component {
 							var endNode = document.getElementById(annotation.range.end);
 							if (!startNode || !endNode) {
 								alert("Error during loading the workspace. Try refresh the page")
-								return;
+								this.setState({hasError:true});
 							}
 							range.setStart(startNode, 0);
 							range.setEnd(endNode, 0);
@@ -213,6 +215,14 @@ class Workspace extends Component {
 					pendingAnnotation: annotation,
 					pendingRange: range,
 					pendingType: "text",
+				}, ()=>{
+					var top = $("#annotationSection").offset().top;
+					var height = $("#annotationSection").height();
+					var buttom = top+height;
+					var diff = $(this.state.pendingRange.startContainer).offset().top - buttom;
+					if(diff>20){
+						$("#pendingAnnotation").css("top", diff-10);
+					}
 				})
 			} else {
 				alert("No text selected");
@@ -223,7 +233,15 @@ class Workspace extends Component {
 			this.setState({
 				pendingAnnotation: annotation,
 				pendingRange: annotation.range,
-				pendingType: "image",
+				pendingType:"image",
+			}, ()=>{
+				var top = $("#annotationSection").offset().top;
+				var height = $("#annotationSection").height();
+				var buttom = top+height;
+				var diff = $("#"+this.state.pendingRange).offset().top - buttom;
+				if(diff>20){
+					$("#pendingAnnotation").css("top", diff-10);
+				}
 			})
 		}
 
@@ -265,6 +283,9 @@ class Workspace extends Component {
 				pendingRange: null,
 				pendingType: null,
 				annotations: [...this.state.annotations, annotation]
+			}, ()=>{
+				var top = $(".annotation").length>0? $($(".annotation").get(0)).css("top"):0;
+				$("#"+annotation.id).css("top", top);
 			})
 		});
 
@@ -319,9 +340,9 @@ class Workspace extends Component {
 		if (animation_move < 0) {
 			animation_move = 0;
 		}
-		$('html, body').stop().animate({ scrollTop: new_highlight - 300 }, 500);
-		$(".annotation").stop().animate({ "top": animation_move + "px" }, {
-			duration: 500,
+		$('html, body').stop().animate({ scrollTop: new_highlight -300}, 1000);
+		$(".annotation").stop().animate({"top": animation_move+"px"}, {
+			duration: 1000,
 			easing: "linear",
 			step: () => {
 				this.setState({ annotations: this.state.annotations.map(a => ({ ...a, animated: !a.animated })) });
@@ -331,20 +352,23 @@ class Workspace extends Component {
 
 	showAnnotationsByName = e => {
 		let nameAnnotations = []
-		console.log(this.state.annotations)
+		
 		this.state.annotations.forEach((a) => {
-			if (e.target.id == a.name) {
+			if(e.target.id === a.name){
 				nameAnnotations.push(a)
 			}
 		});
-		if (this.state.showAllAnnotation) {
+		if(e.target.id !== this.state.currentAnnotationName){
 			e.target.style.backgroundColor = "#72bcd4"
+			if(this.state.currentAnnotationName !== ""){
+				document.getElementById(this.state.currentAnnotationName).style.backgroundColor = '#add8e6';
+			}
 			this.setState({
 				annotationsByName: nameAnnotations,
 				showAllAnnotation: false,
 				currentAnnotationName: e.target.id
-			})
-		} else if (!this.state.showAllAnnotation && e.target.id == this.state.currentAnnotationName) {
+				})
+		}else if(!this.state.showAllAnnotation && e.target.id === this.state.currentAnnotationName ){
 			e.target.style.backgroundColor = '#add8e6'
 			this.setState({
 				showAllAnnotation: true,
@@ -434,8 +458,9 @@ class Workspace extends Component {
 						/>
 						<div id="annotationSection">
 							{nameAnnotations}
-							{pendingAnnotation}
+							
 						</div>
+						{pendingAnnotation}
 					</Col>
 				</Row>
 				<CreateButton
@@ -444,6 +469,7 @@ class Workspace extends Component {
 				<ColorSelection
 					onClick={this.setColor}
 				/>
+				<Tip/>
 			</Container>
 
 		)
