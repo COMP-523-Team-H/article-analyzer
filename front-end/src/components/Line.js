@@ -47,7 +47,7 @@ class Annotation extends Component {
 		this.setState({ mounted: Math.abs(annoY-contY)<1000 });
 	}
 
-	componentDidUpdate() {
+	componentDidUpdate(prevProps, prevState) {
 		//get bounding rects of annotation and range start
 		var annotation = document.getElementById(this.props.annoId);
 		var annoRect = annotation.getBoundingClientRect();
@@ -56,9 +56,10 @@ class Annotation extends Component {
 			this.setState({
 				annoX: annoRect.x,
 				annoY: annoRect.y + (annoRect.height / 2) + window.pageYOffset,
-				mounted: Math.abs(annoRect.y + (annoRect.height / 2) + window.pageYOffset-this.state.contY)<700
+				mounted: Math.abs(annoRect.y + (annoRect.height / 2) + window.pageYOffset-this.state.contY)<400
 			});
 		}
+		
 	}
 
 	render() {
