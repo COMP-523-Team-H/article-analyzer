@@ -247,11 +247,17 @@ class Workspace extends Component {
 
 	}
 
-	deleteAnnotation(id) {
-		console.log(id);
-		req.post(hostname + '/api/annotation/delete', { id: id }).then((response) => {
+	deleteAnnotation(annotation) {
+		console.log(Object.entries(this.state.collaborators));
+		req.post(hostname + '/api/annotation/delete', { id: annotation.id }).then((response) => {
+			var newCollaborators = {};
+			Object.entries(this.state.collaborators).map(c => {
+				if (c[0] !== annotation.name) newCollaborators[c[0]] = c[1];
+				else if (c[1] > 1) newCollaborators[c[0]] = c[1] - 1;
+			})
 			this.setState({
-				annotations: this.state.annotations.filter(a => a.id !== id)
+				annotations: this.state.annotations.filter(a => a.id !== annotation.id),
+				collaborators: newCollaborators
 			})
 		});
 	}

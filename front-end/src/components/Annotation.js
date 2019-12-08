@@ -28,7 +28,7 @@ class Annotation extends Component {
 
 	render() {
 		var content = this.state.collapsed && this.state.content.length > 140 ? this.state.content.substr(0, 140) + " ..." : this.state.content;
-		var deleteButton = this.state.new ? <Button variant="secondary" onClick={(e) => {this.props.deleteAnnotation(this.state.id)}}>Delete</Button> : null;
+		var deleteButton = this.state.new ? <Button variant="secondary" onClick={(e) => {this.props.deleteAnnotation(this.state)}}>Delete</Button> : null;
 		return (
 			<Fragment>
 				<Container
