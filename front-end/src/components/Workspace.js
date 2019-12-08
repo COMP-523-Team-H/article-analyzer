@@ -341,20 +341,27 @@ class Workspace extends Component {
 
 	showAnnotationsByName = e =>{
 		let nameAnnotations = []
-		console.log(this.state.annotations)
+		
 		this.state.annotations.forEach((a) => {
 			if(e.target.id === a.name){
 				nameAnnotations.push(a)
 			}
 		});
-		if(this.state.showAllAnnotation){
+		if(e.target.id !== this.state.currentAnnotationName){
 			e.target.style.backgroundColor = "#72bcd4"
+			if(this.state.currentAnnotationName !== ""){
+				document.getElementById(this.state.currentAnnotationName).style.backgroundColor = '#add8e6';
+			}
 			this.setState({
 				annotationsByName: nameAnnotations,
 				showAllAnnotation: false,
 				currentAnnotationName: e.target.id
 				})
+<<<<<<< HEAD
+		}else if(e.target.id === this.state.currentAnnotationName ){
+=======
 		}else if(!this.state.showAllAnnotation && e.target.id === this.state.currentAnnotationName ){
+>>>>>>> master
 			e.target.style.backgroundColor = '#add8e6'
 			this.setState({
 				showAllAnnotation: true,
