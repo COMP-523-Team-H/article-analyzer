@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react"
 import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button"
-import { generateKeyPair } from "crypto";
 
 
 class Collaborators extends Component {
@@ -9,7 +8,7 @@ class Collaborators extends Component {
 
 	render() {
 		var collaborators = this.props.collaborators? Object.keys(this.props.collaborators).map((name, i)=>{
-			return <Button style={buttonStyle} id= {name} onClick={this.props.showByName}>
+			return <Button style={buttonStyle} id= {name} key ={name} onClick={this.props.showByName}>
 				{name}:{this.props.collaborators[name]}
 			</Button>
 		}):null;
