@@ -255,14 +255,6 @@ class Workspace extends Component {
 
 	deleteAnnotation(annotation) {
 		rangy.remove(annotation.range, annotation.color);
-		this.state.annotations.forEach(annotation=>{
-			if(annotation.type === "text"){
-				rangy.highlight(annotation.range, annotation.color);
-			}else{
-				rangy.highlight_image(annotation.range, annotation.color);
-			}
-			
-		})
 		this.selectAnnotation(annotation);
 		req.post(hostname + '/api/annotation/delete', { id: annotation.id }).then((response) => {
 			var newCollaborators = {};
@@ -274,6 +266,14 @@ class Workspace extends Component {
 			this.setState({
 				annotations: this.state.annotations.filter(a => a.id !== annotation.id),
 				collaborators: newCollaborators
+			}, ()=>{
+				this.state.annotations.forEach(annotation=>{
+					if(annotation.type === "text"){
+						rangy.highlight(annotation.range, annotation.color);
+					}else{
+						rangy.highlight_image(annotation.range, annotation.color);
+					}	
+				});
 			})
 		});
 	}
