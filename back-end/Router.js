@@ -67,7 +67,7 @@ var scrape = html => {
 				$(this).remove()
 			} else {
 				//build image tag here
-				let image = "<div class=\"imageWrap\" id=\"" + uuidv4() + "\">" + picture + "</div>"
+				let image = "<span class=\"imageWrap\" id=\"" + uuidv4() + "\">" + picture + "</span>"
 				content += image + "<br />";
 			}
 
