@@ -1,0 +1,44 @@
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="53.229354831428" height="26.935778519368938" version="1.1" inkscape:version="0.92.4 (5da689c313, 2019-01-14)" sodipodi:docname="instructions.svg"><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none" class="selected" style=""/>
+  <defs id="defs2">
+    <marker inkscape:stockid="Arrow1Send" orient="auto" refY="0.0" refX="0.0" id="marker5480" style="overflow:visible;" inkscape:isstock="true">
+      <path id="path5478" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000087;stroke-width:1pt;stroke-opacity:1;fill:#000087;fill-opacity:1" transform="rotate(180 -0.45000001788139343,0) scale(0.20000000298023224) translate(6,0) "/>
+    </marker>
+    <marker inkscape:isstock="true" style="overflow:visible;" id="marker5402" refX="0.0" refY="0.0" orient="auto" inkscape:stockid="Arrow1Send" inkscape:collect="always">
+      <path transform="rotate(180 -0.45000001788139343,0) scale(0.20000000298023224) translate(6,0) " style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " id="path5400"/>
+    </marker>
+    <marker inkscape:stockid="Arrow1Send" orient="auto" refY="0.0" refX="0.0" id="Arrow1Send" style="overflow:visible;" inkscape:isstock="true" inkscape:collect="always">
+      <path id="path4581" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000087;stroke-width:1pt;stroke-opacity:1;fill:#000087;fill-opacity:1" transform="rotate(180 -0.45000001788139343,0) scale(0.20000000298023224) translate(6,0) "/>
+    </marker>
+    <marker inkscape:stockid="Arrow1Lend" orient="auto" refY="0.0" refX="0.0" id="marker4890" style="overflow:visible;" inkscape:isstock="true">
+      <path id="path4888" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000087;stroke-width:1pt;stroke-opacity:1;fill:#000087;fill-opacity:1" transform="rotate(180 -7,0) scale(0.800000011920929) translate(12.5,0) "/>
+    </marker>
+    <marker inkscape:stockid="Arrow1Lend" orient="auto" refY="0.0" refX="0.0" id="Arrow1Lend" style="overflow:visible;" inkscape:isstock="true">
+      <path id="path4569" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000087;stroke-width:1pt;stroke-opacity:1;fill:#000087;fill-opacity:1" transform="rotate(180 -7,0) scale(0.800000011920929) translate(12.5,0) "/>
+    </marker>
+    <marker inkscape:stockid="Arrow1Lstart" orient="auto" refY="0.0" refX="0.0" id="Arrow1Lstart" style="overflow:visible" inkscape:isstock="true">
+      <path id="path4566" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1" transform="scale(0.800000011920929) translate(12.5,0) "/>
+    </marker>
+    <inkscape:path-effect effect="powerstroke" id="path-effect3759" is_visible="true" offset_points="0,0.13229166" sort_points="true" interpolator_type="CubicBezierJohan" interpolator_beta="0.2" start_linecap_type="zerowidth" linejoin_type="extrp_arc" miter_limit="4" end_linecap_type="zerowidth"/>
+    <inkscape:path-effect effect="powerstroke" id="path-effect3751" is_visible="true" offset_points="0,0.13229166" sort_points="true" interpolator_type="CubicBezierJohan" interpolator_beta="0.2" start_linecap_type="zerowidth" linejoin_type="extrp_arc" miter_limit="4" end_linecap_type="zerowidth"/>
+  </defs>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="1.4142136" inkscape:cx="184.91007" inkscape:cy="235.63276" inkscape:document-units="mm" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="1200" inkscape:window-height="1867" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1"/>
+  <metadata id="metadata5">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  
+<g class="currentLayer" style=""><title>Layer 1</title>
+    <path style="fill:none;stroke:#000087;stroke-width:0.36500001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow1Send)" d="m27.026013050300598,14.581190949401844 c0,0 22.886458,-4.10105 23.01875,-13.29532 " id="path4874" inkscape:connector-curvature="0" class=""/>
+    <text xml:space="preserve" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.14999998;font-family:'Segoe Print';-inkscape-font-specification:'Segoe Print';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332" x="6.322368050300597" y="12.596810949401856" id="text5232" class=""/>
+    <text xml:space="preserve" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.14999998;font-family:'Rage Italic';-inkscape-font-specification:'Rage Italic, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332" x="3.7426810503005967" y="14.581190949401844" id="text5236" class=""/>
+    <text xml:space="preserve" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.14999998;font-family:'Segoe Print';-inkscape-font-specification:'Segoe Print';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000087;fill-opacity:1;stroke:none;stroke-width:0.26458332" x="26.426562050300596" y="12.66296094940185" id="text5244" class=""><tspan sodipodi:role="line" id="tspan5242" x="26.426562050300596" y="12.66296094940185" style="font-size:6.3499999px;line-height:1.14999998;text-align:end;text-anchor:end;fill:#000087;fill-opacity:1;stroke-width:0.26458332">Choose a</tspan><tspan sodipodi:role="line" x="26.426562050300596" y="19.96546094940186" style="font-size:6.3499999px;line-height:1.14999998;text-align:end;text-anchor:end;fill:#000087;fill-opacity:1;stroke-width:0.26458332" id="tspan5246">website</tspan></text>
+    
+    
+    
+    
+  </g></svg>

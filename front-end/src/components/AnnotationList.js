@@ -21,6 +21,8 @@ class AnnotationList extends Component {
 					collapsed={annotation.collapsed}
 					animated={annotation.animated}
 					type={annotation.type}
+					new={annotation.new}
+					deleteAnnotation={this.props.deleteAnnotation}
 				/>
 			)
 		:null;
