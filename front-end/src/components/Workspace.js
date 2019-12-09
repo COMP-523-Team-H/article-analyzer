@@ -200,7 +200,9 @@ class Workspace extends Component {
 				if (range.collapsed) {
 					return;
 				}
+				console.log();
 				if (!$("#content").has($(range.commonAncestorContainer))
+					||$("#content").has($(range.commonAncestorContainer)).length === 0
 					|| range.startContainer.id === "content"
 					|| range.endContainer.id === "content") {
 					alert("Illegal Annotation Selection");
@@ -360,7 +362,10 @@ class Workspace extends Component {
 
 	showAnnotationsByName = e => {
 		let nameAnnotations = []
-		
+		console.log($(".annotation.selected"))
+		if($(".annotation.selected").get(0) != null ){
+			console.log($(".annotation.selected"));
+		}
 		this.state.annotations.forEach((a) => {
 			if(e.target.id === a.name){
 				nameAnnotations.push(a)

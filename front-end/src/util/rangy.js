@@ -66,7 +66,6 @@ const rangy = {
         image.addClass("highlight");
         image.addClass("highlight-"+color);
         rangy.refresh(id, null);
-        console.log(id);
     },
 
    
@@ -103,7 +102,6 @@ const rangy = {
 
     refresh: (id, selected)=>{  //selected is the color selected. Null if not selected
         var classList = document.getElementById(id).classList;
-        console.log(classList);
         var colors = [];
         classList.forEach(c => {
             var matches = c.match("(highlight-)([a-z]+)");
@@ -114,7 +112,6 @@ const rangy = {
                 }
             }
         });
-        console.log(colors);
         if(classList.contains("image")){
             color.drawImage(id, colors, selected);
         }else{
@@ -127,7 +124,6 @@ const rangy = {
         var nodes = rangy.getRangeSelectedNodes(range);
         nodes.forEach(node=>{
             if(node.id){
-                console.log(color);
                 $("#" + node.id).removeClass("highlight");
                 $("#" + node.id).removeClass("highlight-" + color);
                 $("#" + node.id).removeClass("selected");
