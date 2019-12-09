@@ -103,29 +103,38 @@ const rangy = {
 
     refresh: (id, selected)=>{  //selected is the color selected. Null if not selected
         var classList = document.getElementById(id).classList;
-        if(!classList.contains("highlight")){
-            return;
-        }else{
-            var colors = [];
-            classList.forEach(c => {
-                var matches = c.match("(highlight-)([a-z]+)");
-                if(matches){
-                    var color = matches[2];
-                    if(color){
-                        colors.push(color);
-                    }
-                }
-            });
-            if(classList.contains("image")){
-                color.drawImage(id, colors, selected);
-            }else{
-                if(classList.contains("selected")){
-                    color.drawText(id, colors, selected);
-                }else{
-                    color.drawText(id, colors, selected);
+        console.log(classList);
+        var colors = [];
+        classList.forEach(c => {
+            var matches = c.match("(highlight-)([a-z]+)");
+            if(matches){
+                var color = matches[2];
+                if(color){
+                    colors.push(color);
                 }
             }
+        });
+        console.log(colors);
+        if(classList.contains("image")){
+            color.drawImage(id, colors, selected);
+        }else{
+            color.drawText(id, colors, selected);
         }
+    
+    },
+
+    remove: (range, color)=>{
+        var nodes = rangy.getRangeSelectedNodes(range);
+        nodes.forEach(node=>{
+            if(node.id){
+                console.log(color);
+                $("#" + node.id).removeClass("highlight");
+                $("#" + node.id).removeClass("highlight-" + color);
+                $("#" + node.id).removeClass("selected");
+                $("#" + node.id).removeClass("selected-" + color);
+                rangy.refresh(node.id, null);
+            }
+        })
     }
 
 }

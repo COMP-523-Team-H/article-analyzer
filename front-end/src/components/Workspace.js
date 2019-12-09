@@ -248,7 +248,8 @@ class Workspace extends Component {
 	}
 
 	deleteAnnotation(annotation) {
-		console.log(Object.entries(this.state.collaborators));
+		rangy.remove(annotation.range, annotation.color);
+		this.selectAnnotation(annotation);
 		req.post(hostname + '/api/annotation/delete', { id: annotation.id }).then((response) => {
 			var newCollaborators = {};
 			Object.entries(this.state.collaborators).map(c => {
