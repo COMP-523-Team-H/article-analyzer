@@ -121,16 +121,26 @@ const rangy = {
     },
 
     remove: (range, color)=>{
-        var nodes = rangy.getRangeSelectedNodes(range);
-        nodes.forEach(node=>{
-            if(node.id){
-                $("#" + node.id).removeClass("highlight");
-                $("#" + node.id).removeClass("highlight-" + color);
-                $("#" + node.id).removeClass("selected");
-                $("#" + node.id).removeClass("selected-" + color);
-                rangy.refresh(node.id, null);
-            }
-        })
+        if(range.startContainer){
+            var nodes = rangy.getRangeSelectedNodes(range);
+            nodes.forEach(node=>{
+                if(node.id){
+                    $("#" + node.id).removeClass("highlight");
+                    $("#" + node.id).removeClass("highlight-" + color);
+                    $("#" + node.id).removeClass("selected");
+                    $("#" + node.id).removeClass("selected-" + color);
+                    rangy.refresh(node.id, null);
+                }
+            })
+        }else{
+            $("#" + range).removeClass("highlight");
+            $("#" +range).removeClass("highlight-" + color);
+            $("#" + range).removeClass("selected");
+            $("#" + range).removeClass("selected-" + color);
+            rangy.refresh(range, null);
+        }
+        
+        
     }
 
 }
