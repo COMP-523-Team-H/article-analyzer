@@ -255,6 +255,7 @@ class Workspace extends Component {
 			Object.entries(this.state.collaborators).map(c => {
 				if (c[0] !== annotation.name) newCollaborators[c[0]] = c[1];
 				else if (c[1] > 1) newCollaborators[c[0]] = c[1] - 1;
+				return 0;
 			})
 			this.setState({
 				annotations: this.state.annotations.filter(a => a.id !== annotation.id),
