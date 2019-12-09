@@ -114,6 +114,7 @@ class Workspace extends Component {
 					var annotations = data.annotations;
 					annotations.forEach(annotation => {
 						if (annotation.type === "text") {
+							console.log(annotation)
 							var range = new Range();
 							var startNode = document.getElementById(annotation.range.start);
 							var endNode = document.getElementById(annotation.range.end);
@@ -200,12 +201,15 @@ class Workspace extends Component {
 				if (range.collapsed) {
 					return;
 				}
-				console.log();
 				if (!$("#content").has($(range.commonAncestorContainer))
-					||$("#content").has($(range.commonAncestorContainer)).length === 0
+					||($("#content").has($(range.commonAncestorContainer)).length === 0 && $(range.commonAncestorContainer).attr("id") !=="content")
 					|| range.startContainer.id === "content"
 					|| range.endContainer.id === "content") {
 					alert("Illegal Annotation Selection");
+					return;
+				}
+				if(range.commonAncestorContainer.classList.contains("image")){
+					alert("Click on an image to do annotation!");
 					return;
 				}
 				var startNode = document.getElementById(range.startContainer.parentElement.id);
@@ -269,6 +273,7 @@ class Workspace extends Component {
 	finishAnnotation(annotation) {
 		var range;
 
+		console.log(annotation);
 		if (annotation.type === "text") {
 			range = rangy.compress(this.state.pendingRange);
 		} else {
@@ -305,6 +310,7 @@ class Workspace extends Component {
 		if (annotation.type === "click") {
 			return;
 		}
+		console.log(annotation);
 		// DARKENED HIGHLIGHT AREA
 		var selected = this.state.selectedAnnotation;
 		if (!selected) {
@@ -362,10 +368,7 @@ class Workspace extends Component {
 
 	showAnnotationsByName = e => {
 		let nameAnnotations = []
-		console.log($(".annotation.selected"))
-		if($(".annotation.selected").get(0) != null ){
-			console.log($(".annotation.selected"));
-		}
+		$(".annotation").css("top", "");
 		this.state.annotations.forEach((a) => {
 			if(e.target.id === a.name){
 				nameAnnotations.push(a)
