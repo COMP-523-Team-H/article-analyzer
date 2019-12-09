@@ -37,7 +37,9 @@ class Annotation extends Component {
 					id={this.state.id}
 					className="annotation"
 					onClick={this.handleClick}
-					style={{ backgroundColor: color.rgba(constant.COLOR[this.state.color], 0.55) }}
+					style={{
+						backgroundColor: color.rgba(constant.COLOR[this.state.color], 0.55)
+					}}
 				>
 					<Row>
 						<Col xs={10} style={{textAlign: "left"}}>
@@ -48,7 +50,7 @@ class Annotation extends Component {
 						</Col>
 					</Row>
 					<Row>
-						<span className="annotationContent">{content}</span>
+						<span className="annotationContent" style={{paddingLeft: "5px"}}>{content}</span>
 					</Row>
 				</Container>
 				<Line

@@ -93,6 +93,7 @@
 
 #annotationSection{
   display: inline-block;
+  width: 80%;
 }
 
 #pendingAnnotation{
