@@ -458,7 +458,7 @@ class Workspace extends Component {
 				range={this.state.pendingRange}
 				type={this.state.pendingType}
 			/> : null;
-		if (window.innerWidth < 760) return (<ScreenSizeWarning />);
+		if (this.state.hide) return (<ScreenSizeWarning />);
 		else return (
 			<Container>
 				<Row>
