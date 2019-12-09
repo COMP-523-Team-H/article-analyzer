@@ -1,0 +1,44 @@
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="46" height="15" version="1.1" inkscape:version="0.92.4 (5da689c313, 2019-01-14)" sodipodi:docname="instructions.svg"><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none" class="" style=""/>
+  <defs id="defs2">
+    <marker inkscape:stockid="Arrow1Send" orient="auto" refY="0.0" refX="0.0" id="marker5480" style="overflow:visible;" inkscape:isstock="true">
+      <path id="path5478" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000087;stroke-width:1pt;stroke-opacity:1;fill:#000087;fill-opacity:1" transform="rotate(180 -3.1500000953674316,0) scale(0.20000000298023224) translate(6,0) "/>
+    </marker>
+    <marker inkscape:isstock="true" style="overflow:visible;" id="marker5402" refX="0.0" refY="0.0" orient="auto" inkscape:stockid="Arrow1Send" inkscape:collect="always">
+      <path transform="rotate(180 -3.1500000953674316,0) scale(0.20000000298023224) translate(6,0) " style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " id="path5400"/>
+    </marker>
+    <marker inkscape:stockid="Arrow1Send" orient="auto" refY="0.0" refX="0.0" id="Arrow1Send" style="overflow:visible;" inkscape:isstock="true" inkscape:collect="always">
+      <path id="path4581" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000087;stroke-width:1pt;stroke-opacity:1;fill:#000087;fill-opacity:1" transform="rotate(180 -3.1500000953674316,0) scale(0.20000000298023224) translate(6,0) "/>
+    </marker>
+    <marker inkscape:stockid="Arrow1Lend" orient="auto" refY="0.0" refX="0.0" id="marker4890" style="overflow:visible;" inkscape:isstock="true">
+      <path id="path4888" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000087;stroke-width:1pt;stroke-opacity:1;fill:#000087;fill-opacity:1" transform="rotate(180 -49,0) scale(0.800000011920929) translate(12.5,0) "/>
+    </marker>
+    <marker inkscape:stockid="Arrow1Lend" orient="auto" refY="0.0" refX="0.0" id="Arrow1Lend" style="overflow:visible;" inkscape:isstock="true">
+      <path id="path4569" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000087;stroke-width:1pt;stroke-opacity:1;fill:#000087;fill-opacity:1" transform="rotate(180 -49,0) scale(0.800000011920929) translate(12.5,0) "/>
+    </marker>
+    <marker inkscape:stockid="Arrow1Lstart" orient="auto" refY="0.0" refX="0.0" id="Arrow1Lstart" style="overflow:visible" inkscape:isstock="true">
+      <path id="path4566" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1" transform="scale(0.800000011920929) translate(12.5,0) "/>
+    </marker>
+    <inkscape:path-effect effect="powerstroke" id="path-effect3759" is_visible="true" offset_points="0,0.13229166" sort_points="true" interpolator_type="CubicBezierJohan" interpolator_beta="0.2" start_linecap_type="zerowidth" linejoin_type="extrp_arc" miter_limit="4" end_linecap_type="zerowidth"/>
+    <inkscape:path-effect effect="powerstroke" id="path-effect3751" is_visible="true" offset_points="0,0.13229166" sort_points="true" interpolator_type="CubicBezierJohan" interpolator_beta="0.2" start_linecap_type="zerowidth" linejoin_type="extrp_arc" miter_limit="4" end_linecap_type="zerowidth"/>
+  </defs>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="1.4142136" inkscape:cx="184.91007" inkscape:cy="235.63276" inkscape:document-units="mm" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="1200" inkscape:window-height="1867" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1"/>
+  <metadata id="metadata5">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  
+<g class="currentLayer" style=""><title>Layer 1</title>
+    
+    
+    
+    
+    <path style="fill:none;stroke:#000087;stroke-width:0.36500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5402)" d="m18.123961103515626,8.477943765563964 c0,0 -18.12396,5.55625 -18.12396,-8.0698 " id="path5392" inkscape:connector-curvature="0" class=""/>
+    <text xml:space="preserve" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.14999998;font-family:'Segoe Print';-inkscape-font-specification:'Segoe Print';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000087;fill-opacity:1;stroke:none;stroke-width:0.26458332" x="18.785431103515634" y="5.699823765563963" id="text5466" class=""><tspan sodipodi:role="line" id="tspan5464" x="18.785431103515634" y="5.699823765563963" style="font-size:6.3499999px;line-height:1;fill:#000087;fill-opacity:1;stroke-width:0.26458332">Start</tspan><tspan sodipodi:role="line" x="18.785431103515634" y="13.002323765563972" style="font-size:6.3499999px;line-height:1;fill:#000087;fill-opacity:1;stroke-width:0.26458332" id="tspan5468">annotating</tspan></text>
+    
+    
+  </g></svg>
