@@ -25,7 +25,7 @@ describe('insert three annotations after creating workspace under the same name'
 		})
 		.then(res=>res.json())
 		.then(json=>{
-			id = json.id
+			id = json.id;
 			var obj = {};
 			obj.original_url = json.original_url;
 			obj.date = json.date;
@@ -34,7 +34,8 @@ describe('insert three annotations after creating workspace under the same name'
 		.then(()=>{
 			path = hostname+'/api/annotation/insert';
 			var annotation = {
-				id: id,
+				workspace: id,
+				id:1,
 				name: name,
 				date: annotationTime,
 				content: content1
@@ -55,7 +56,8 @@ describe('insert three annotations after creating workspace under the same name'
 		.then(()=>{
 			path = hostname+'/api/annotation/insert';
 			var annotation = {
-				id: id,
+				workspace: id,
+				id: 2,
 				name: name,
 				date: annotationTime,
 				content: content2
@@ -76,7 +78,8 @@ describe('insert three annotations after creating workspace under the same name'
 		.then(()=>{
 			path = hostname+'/api/annotation/insert';
 			var annotation = {
-				id: id,
+				workspace: id,
+				id: 3,
 				name: name,
 				date: annotationTime,
 				content: content3

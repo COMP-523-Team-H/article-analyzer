@@ -12,7 +12,7 @@ const req = {
     post: (url, body) =>{
         return fetch(url, {
             method: "POST",
-            headers: {
+            headers: { 
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }, 

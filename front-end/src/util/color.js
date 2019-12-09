@@ -8,7 +8,10 @@ var color = {
     },
 
     drawImage: (id, colors, selected) =>{
-
+        if(colors.length === 0){
+            console.log("sdjfklsdjf")
+            $("#"+id).css("background", "");
+        }
         if(colors.length === 1){
             var rgb = constant.COLOR[colors[0]];
             $("#"+id).css("background", color.rgba(rgb, 0.4));
@@ -32,6 +35,10 @@ var color = {
     },
 
     drawText: (id, colors, selected)=>{
+        if(colors.length === 0){
+            console.log("sdjfklsdjf")
+            $("#"+id).css("background", "");
+        }
         var count = colors.length;
         var a = 0.4;
         var rgb;

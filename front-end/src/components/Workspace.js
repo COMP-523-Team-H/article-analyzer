@@ -200,7 +200,9 @@ class Workspace extends Component {
 				if (range.collapsed) {
 					return;
 				}
+				console.log();
 				if (!$("#content").has($(range.commonAncestorContainer))
+					||$("#content").has($(range.commonAncestorContainer)).length === 0
 					|| range.startContainer.id === "content"
 					|| range.endContainer.id === "content") {
 					alert("Illegal Annotation Selection");
@@ -248,12 +250,14 @@ class Workspace extends Component {
 	}
 
 	deleteAnnotation(annotation) {
-		console.log(Object.entries(this.state.collaborators));
+		rangy.remove(annotation.range, annotation.color);
+		this.selectAnnotation(annotation);
 		req.post(hostname + '/api/annotation/delete', { id: annotation.id }).then((response) => {
 			var newCollaborators = {};
 			Object.entries(this.state.collaborators).map(c => {
 				if (c[0] !== annotation.name) newCollaborators[c[0]] = c[1];
 				else if (c[1] > 1) newCollaborators[c[0]] = c[1] - 1;
+				return 0;
 			})
 			this.setState({
 				annotations: this.state.annotations.filter(a => a.id !== annotation.id),
@@ -358,7 +362,10 @@ class Workspace extends Component {
 
 	showAnnotationsByName = e => {
 		let nameAnnotations = []
-		
+		console.log($(".annotation.selected"))
+		if($(".annotation.selected").get(0) != null ){
+			console.log($(".annotation.selected"));
+		}
 		this.state.annotations.forEach((a) => {
 			if(e.target.id === a.name){
 				nameAnnotations.push(a)

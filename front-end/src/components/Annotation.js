@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
-import Button from "react-bootstrap/Button"
 import Line from "./Line"
 import constant from "../util/constant"
 import color from "../util/color"
@@ -30,7 +29,7 @@ class Annotation extends Component {
 
 	render() {
 		var content = this.state.collapsed && this.state.content.length > 140 ? this.state.content.substr(0, 140) + " ..." : this.state.content;
-		var deleteButton = this.state.new ? <b onClick={(e) => { this.props.deleteAnnotation(this.state) }}>X</b> : null;
+		var deleteButton = this.state.new ? <div class="delete" onClick={(e) => { this.props.deleteAnnotation(this.state) }}><b>X</b></div>: null;
 		return (
 			<Fragment>
 				<Container

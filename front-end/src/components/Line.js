@@ -56,7 +56,7 @@ class Annotation extends Component {
 			this.setState({
 				annoX: annoRect.x,
 				annoY: annoRect.y + (annoRect.height / 2) + window.pageYOffset,
-				mounted: Math.abs(annoRect.y + (annoRect.height / 2) + window.pageYOffset-this.state.contY)<400
+				mounted: Math.abs(annoRect.y + (annoRect.height / 2) + window.pageYOffset-this.state.contY)<700
 			});
 		}
 		
