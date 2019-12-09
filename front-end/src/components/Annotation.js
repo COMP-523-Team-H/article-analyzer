@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react"
 import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import Line from "./Line"
 import constant from "../util/constant"
@@ -28,7 +30,7 @@ class Annotation extends Component {
 
 	render() {
 		var content = this.state.collapsed && this.state.content.length > 140 ? this.state.content.substr(0, 140) + " ..." : this.state.content;
-		var deleteButton = this.state.new ? <Button variant="secondary" onClick={(e) => {this.props.deleteAnnotation(this.state)}}>Delete</Button> : null;
+		var deleteButton = this.state.new ? <b onClick={(e) => { this.props.deleteAnnotation(this.state) }}>X</b> : null;
 		return (
 			<Fragment>
 				<Container
@@ -37,11 +39,19 @@ class Annotation extends Component {
 					onClick={this.handleClick}
 					style={{ backgroundColor: color.rgba(constant.COLOR[this.state.color], 0.55) }}
 				>
-					<b className="annotationHeader">{this.state.name}</b><br />
-					<span className="annotationContent">{content}</span>
-					{deleteButton}
+					<Row>
+						<Col xs={10} style={{textAlign: "left"}}>
+							<b className="annotationHeader">{this.state.name}</b><br />
+						</Col>
+						<Col xs={2} style={{textAlign: "right"}}>
+							{deleteButton}
+						</Col>
+					</Row>
+					<Row>
+						<span className="annotationContent">{content}</span>
+					</Row>
 				</Container>
-				<Line 
+				<Line
 					annoId={this.state.id}
 					range={this.state.range}
 					color={this.state.color}
