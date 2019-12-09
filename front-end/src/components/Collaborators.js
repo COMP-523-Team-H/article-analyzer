@@ -30,7 +30,7 @@ const buttonStyle = {
 	borderColor: "#838383",
 	borderRadius: 12,
 	color: "black",
-	height: "100px"
+	height: "3em"
 }
 
 
