@@ -1,8 +1,8 @@
 var nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport')
 
-const emailLoginName = process.env["REACT_APP_EMAIL"];
-const emailPassword = process.env["REACT_APP_EMAILPASSWORD"];
+const emailLoginName = process.env["REACT_APP_EMAIL"] || "articleannotator@gmail.com";
+const emailPassword = process.env["REACT_APP_EMAILPASSWORD"] || "comp523pass";
 
 module.exports = function sendMail(email, url){
 	const transport = nodemailer.createTransport(smtpTransport({
