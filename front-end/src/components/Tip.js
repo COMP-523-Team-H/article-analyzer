@@ -7,7 +7,7 @@ class Tip extends Component {
             <div id = "tip">
                 <b>Step1:</b> Choose a color you like<br/>
                 <b>Step2:</b> Click on an image or highlight a piece of text<br/>
-                <b>Step3:</b> Annotate!
+                <b>Step3:</b> Click + button to annotate!
             </div>
             
 		)
